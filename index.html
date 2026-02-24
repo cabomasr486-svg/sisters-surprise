@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>اخواتي وروح قلبي ❤️</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+/* الكافر */
+#cover{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:10;
+}
+
+#cover img{
+width:300px;
+border-radius:20px;
+box-shadow:0 0 30px #ff00cc;
+cursor:pointer;
+}
+
+/* الكارت الزجاجي */
+.card{
+margin:20px auto;
+padding:20px;
+width:300px;
+border-radius:20px;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+box-shadow:0 0 20px rgba(255,255,255,0.3);
+cursor:pointer;
+transition:0.5s;
+}
+
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 0 40px #ff00cc;
+}
+
+/* الصورة */
+.card img{
+width:100%;
+border-radius:15px;
+}
+
+/* الاسم بنور */
+.name{
+font-size:24px;
+margin-top:10px;
+text-shadow:0 0 10px #fff,0 0 20px #ff00cc,0 0 40px #ff00cc;
+}
+
+/* الرسالة */
+.message{
+display:none;
+margin-top:10px;
+font-size:18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- الكافر -->
+<div id="cover">
+<img src="cover.gif" onclick="enterSite()">
+</div>
+
+<!-- الصوت العام -->
+<audio id="mainMusic" loop>
+<source src="main.mp3">
+</audio>
+
+<h1>اخواتي وحبايب قلبي ❤️</h1>
+
+<div class="card" onclick="openCard('eman')">
+<img src="eman-2.jpg">
+<div class="name">ايمان ✨</div>
+<div class="message" id="eman-msg">
+اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شراو مكروه ويفرحك علطول واتمني اشوفك اكتر مابتخيل 🤲🫶🥺❤
+</div>
+</div>
+
+<div class="card" onclick="openCard('rokia')">
+<img src="rokia-2.jpg">
+<div class="name">رقيه ✨</div>
+<div class="message" id="rokia-msg">
+اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شراو مكروه ويفرحك علطول واتمني اشوفك اكتر مابتخيل 🤲🫶🥺❤
+</div>
+</div>
+
+<div class="card" onclick="openCard('zainab')">
+<img src="zainab-2.jpg">
+<div class="name">زينب ✨</div>
+<div class="message" id="zainab-msg">
+اختي الكبيره الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شراو مكروه ويفرحك علطول واتمني اشوفك اكتر مابتخيل 🤲🫶🥺❤
+</div>
+</div>
+
+<audio id="eman-music"><source src="eman.mp3"></audio>
+<audio id="rokia-music"><source src="rokia.mp3"></audio>
+<audio id="zainab-music"><source src="zainab.mp3"></audio>
+
+<script>
+
+function enterSite(){
+document.getElementById("cover").style.display="none";
+document.getElementById("mainMusic").play();
+}
+
+function openCard(name){
+
+let password=prompt("اكتب الباسورد");
+
+if(password!="love"){
+alert("غلط ❌");
+return;
+}
+
+document.getElementById(name+"-msg").style.display="block";
+
+document.getElementById("eman-music").pause();
+document.getElementById("rokia-music").pause();
+document.getElementById("zainab-music").pause();
+
+document.getElementById(name+"-music").play();
+
+}
+
+</script>
+
+</body>
+</html>
