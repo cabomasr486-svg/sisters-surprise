@@ -3,104 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>اخواتي 💜</title>
+<title>💜 My Sisters</title>
 
 <style>
 
 body{
 margin:0;
-font-family:Tahoma;
-background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+font-family:Arial;
+background:black;
+color:white;
+overflow:hidden;
 text-align:center;
-color:#333;
 }
 
-/* صندوق */
-.box{
-background:white;
-margin:30px;
+/* خلفية النجوم */
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:url('https://i.imgur.com/YKY28eT.png');
+animation:moveStars 60s linear infinite;
+z-index:-1;
+}
+
+@keyframes moveStars{
+from{background-position:0 0;}
+to{background-position:0 1000px;}
+}
+
+/* القلوب */
+.heart{
+position:fixed;
+color:red;
+animation:fall 6s linear infinite;
+}
+
+@keyframes fall{
+from{
+transform:translateY(-100px);
+opacity:1;
+}
+to{
+transform:translateY(100vh);
+opacity:0;
+}
+}
+
+/* الكارت */
+.card{
+background:rgba(0,0,0,0.6);
+margin:20px;
 padding:20px;
 border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.2);
-}
-
-/* زر */
-button{
-padding:10px 20px;
-margin:10px;
-border:none;
-border-radius:10px;
-background:#ff4d6d;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
-
-button:hover{
-background:#e63950;
+box-shadow:0 0 20px #ff0050;
 }
 
 /* input */
 input{
 padding:10px;
+border:none;
 border-radius:10px;
-border:1px solid #ccc;
+width:200px;
 }
 
-/* صورة */
-img{
-width:200px;
-border-radius:15px;
+/* زر */
+button{
+padding:10px 20px;
+border:none;
+border-radius:10px;
+background:#ff0050;
+color:white;
 margin-top:10px;
+font-size:16px;
 }
 
 /* الاسم */
 .name{
-font-size:24px;
-color:#ff4d6d;
-margin-top:10px;
+font-size:30px;
+color:#ff0050;
+text-shadow:0 0 10px #ff0050;
 }
 
-/* الرسالة */
-.msg{
+/* الصورة */
+img{
+width:200px;
+border-radius:20px;
 margin-top:10px;
-font-size:18px;
 }
 
 /* العداد */
 .age{
+font-size:20px;
 margin-top:10px;
-color:#555;
+color:#00f2ff;
 }
 
 </style>
 </head>
 <body>
 
-<audio id="mainMusic" src="main.mp3" loop></audio>
-<audio id="zMusic" src="zainab.mp3" loop></audio>
-<audio id="eMusic" src="eman.mp3" loop></audio>
-<audio id="rMusic" src="rokia.mp3" loop></audio>
+<div class="stars"></div>
 
-<!-- صفحة الباسورد -->
-<div id="login" class="box">
+<audio id="mainMusic" loop>
+<source src="main.mp3">
+</audio>
 
-<h2>ادخل الباسورد</h2>
+<audio id="zainabMusic" loop>
+<source src="zainab.mp3">
+</audio>
 
-<input type="password" id="mainPass">
+<audio id="emanMusic" loop>
+<source src="eman.mp3">
+</audio>
 
-<br>
+<audio id="rokiaMusic" loop>
+<source src="rokia.mp3">
+</audio>
+
+<!-- صفحة الدخول -->
+<div id="login" class="card">
+
+<h2>💜 TikTok Login</h2>
+
+<input type="password" id="mainPass" placeholder="ادخل الباسورد"><br>
 
 <button onclick="login()">دخول</button>
 
 </div>
 
 <!-- الصفحة الرئيسية -->
-<div id="home" style="display:none" class="box">
+<div id="home" style="display:none">
 
-<h2>اخواتي وحبايب قلبي 💜</h2>
+<div class="card">
 
-<p>اضغطي على اسمك</p>
+<h2>اخواتي وروحي 💜</h2>
 
 <button onclick="openPage('zainab')">Zainab</button>
 <button onclick="openPage('eman')">Eman</button>
@@ -108,15 +144,17 @@ color:#555;
 
 </div>
 
-<!-- زينب -->
-<div id="zainab" style="display:none" class="box">
+</div>
 
-<div class="name">Zainab</div>
+<!-- صفحة زينب -->
+<div id="zainab" style="display:none" class="card">
+
+<div class="name">Zainab 💜</div>
 
 <img src="zainab.jpg">
 
-<div class="msg">
-اختي الكبيره الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر 🤲❤
+<div>
+اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر ❤️
 </div>
 
 <div class="age" id="ageZ"></div>
@@ -125,15 +163,15 @@ color:#555;
 
 </div>
 
-<!-- ايمان -->
-<div id="eman" style="display:none" class="box">
+<!-- صفحة ايمان -->
+<div id="eman" style="display:none" class="card">
 
-<div class="name">Eman</div>
+<div class="name">Eman 💜</div>
 
 <img src="eman.jpg">
 
-<div class="msg">
-اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر 🤲❤
+<div>
+اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر ❤️
 </div>
 
 <div class="age" id="ageE"></div>
@@ -142,15 +180,15 @@ color:#555;
 
 </div>
 
-<!-- رقية -->
-<div id="rokia" style="display:none" class="box">
+<!-- صفحة رقية -->
+<div id="rokia" style="display:none" class="card">
 
-<div class="name">Rokia</div>
+<div class="name">Rokia 💜</div>
 
 <img src="rokia.jpg">
 
-<div class="msg">
-اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر 🤲❤
+<div>
+اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر ❤️
 </div>
 
 <div class="age" id="ageR"></div>
@@ -161,22 +199,24 @@ color:#555;
 
 <script>
 
-const PASSWORD="love";
+/* الباسورد الرئيسي */
+const MAIN_PASSWORD="love";
 
-const zDate=new Date("2000-09-16");
-const eDate=new Date("2002-02-12");
-const rDate=new Date("2005-12-12");
+/* تواريخ الميلاد */
+const zainabDate=new Date("2005-09-01");
+const emanDate=new Date("2008-02-01");
+const rokiaDate=new Date("2010-12-01");
 
 function login(){
 
 let pass=document.getElementById("mainPass").value;
 
-if(pass===PASSWORD){
+if(pass===MAIN_PASSWORD){
 
-login.style.display="none";
-home.style.display="block";
+document.getElementById("login").style.display="none";
+document.getElementById("home").style.display="block";
 
-mainMusic.play();
+document.getElementById("mainMusic").play();
 
 }else{
 
@@ -186,48 +226,67 @@ alert("الباسورد غلط");
 
 }
 
+/* فتح صفحة */
 function openPage(name){
 
-home.style.display="none";
+document.getElementById("home").style.display="none";
 
-mainMusic.pause();
-zMusic.pause();
-eMusic.pause();
-rMusic.pause();
+document.getElementById("mainMusic").pause();
+
+document.getElementById("zainabMusic").pause();
+document.getElementById("emanMusic").pause();
+document.getElementById("rokiaMusic").pause();
 
 document.getElementById(name).style.display="block";
 
-if(name=="zainab") zMusic.play();
-if(name=="eman") eMusic.play();
-if(name=="rokia") rMusic.play();
+if(name==="zainab") document.getElementById("zainabMusic").play();
+if(name==="eman") document.getElementById("emanMusic").play();
+if(name==="rokia") document.getElementById("rokiaMusic").play();
 
 }
 
+/* رجوع */
 function back(){
 
-zainab.style.display="none";
-eman.style.display="none";
-rokia.style.display="none";
+document.getElementById("zainab").style.display="none";
+document.getElementById("eman").style.display="none";
+document.getElementById("rokia").style.display="none";
 
-home.style.display="block";
+document.getElementById("home").style.display="block";
 
-mainMusic.play();
+document.getElementById("mainMusic").play();
 
 }
 
+/* حساب العمر */
 function calcAge(birth){
 
 let now=new Date();
 
-let age=now.getFullYear()-birth.getFullYear();
+let age=now-birth;
 
-return "العمر: "+age+" سنة";
+let years=Math.floor(age/(1000*60*60*24*365));
+
+return years+" سنة";
 
 }
 
-ageZ.innerHTML=calcAge(zDate);
-ageE.innerHTML=calcAge(eDate);
-ageR.innerHTML=calcAge(rDate);
+document.getElementById("ageZ").innerHTML=calcAge(zainabDate);
+document.getElementById("ageE").innerHTML=calcAge(emanDate);
+document.getElementById("ageR").innerHTML=calcAge(rokiaDate);
+
+/* القلوب */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"%";
+heart.style.fontSize=(Math.random()*20+20)+"px";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+
+},500);
 
 </script>
 
