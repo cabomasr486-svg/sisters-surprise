@@ -6,6 +6,7 @@
 <title>💜 Sisters Surprise</title>
 
 <style>
+
 body{
 margin:0;
 font-family:Arial;
@@ -14,6 +15,7 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+color:white;
 overflow:hidden;
 }
 
@@ -24,128 +26,108 @@ position:absolute;
 width:200%;
 height:200%;
 background:url("https://i.imgur.com/YKY28eT.png");
-animation:moveStars 60s linear infinite;
-opacity:.4;
+animation:stars 60s linear infinite;
+opacity:0.3;
 }
 
-@keyframes moveStars{
+@keyframes stars{
 from{transform:translateY(0);}
 to{transform:translateY(-1000px);}
 }
 
-/* الكارت */
-.card{
-position:relative;
-width:340px;
+/* صندوق زجاجي */
+.glass{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
 padding:30px;
 border-radius:25px;
 text-align:center;
-background:rgba(255,255,255,0.07);
-backdrop-filter:blur(20px);
 box-shadow:0 0 40px rgba(255,0,150,0.4);
-color:white;
+width:340px;
 }
 
-/* الاسم */
-.name{
+/* العنوان */
+.title{
 font-size:32px;
+margin-bottom:20px;
 text-shadow:0 0 20px #ff4ecd;
-margin-bottom:15px;
 }
 
-/* الصورة */
-.avatar{
-width:160px;
-height:160px;
-margin:auto;
-border-radius:50%;
-padding:4px;
-background:linear-gradient(45deg,#ff00cc,#3333ff,#ff00cc);
-animation:rotate 6s linear infinite;
-}
-
-.avatar img{
-width:100%;
-height:100%;
-border-radius:50%;
-}
-
-@keyframes rotate{
-0%{filter:hue-rotate(0deg);}
-100%{filter:hue-rotate(360deg);}
-}
-
-/* رسالة */
-.message{
-margin-top:15px;
-font-size:18px;
-}
-
-/* العداد */
-.counter{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-top:20px;
-}
-
-.box{
-background:rgba(255,255,255,0.1);
-padding:10px;
-border-radius:15px;
-width:80px;
-}
-
-.num{
-font-size:20px;
-color:#00eaff;
-font-weight:bold;
-}
-
-.label{
-font-size:13px;
-color:#ccc;
+/* input */
+input{
+width:90%;
+padding:12px;
+border-radius:20px;
+border:none;
+outline:none;
+font-size:16px;
+text-align:center;
 }
 
 /* زر */
 button{
-margin-top:20px;
+margin-top:15px;
 padding:12px 30px;
 border:none;
-border-radius:30px;
-background:linear-gradient(45deg,#ff00cc,#3333ff);
+border-radius:20px;
+background:linear-gradient(45deg,#ff0099,#493240);
 color:white;
 font-size:18px;
 cursor:pointer;
-box-shadow:0 0 20px #ff00cc;
+box-shadow:0 0 20px #ff0099;
 }
 
-/* login */
-#login{
-display:block;
+/* الصورة */
+.avatar{
+width:150px;
+height:150px;
+border-radius:50%;
+margin:auto;
+margin-bottom:15px;
+border:4px solid #ff4ecd;
+box-shadow:0 0 30px #ff4ecd;
+background-size:cover;
+background-position:center;
 }
 
-input{
-padding:12px;
-border-radius:20px;
-border:none;
-width:80%;
+/* العداد الزجاجي */
+.counter{
 margin-top:15px;
+padding:15px;
+border-radius:20px;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+font-size:18px;
+box-shadow:0 0 20px rgba(255,255,255,0.3);
 }
 
-.hidden{
-display:none;
+/* زر رجوع */
+.back{
+margin-top:15px;
+background:linear-gradient(45deg,#00c6ff,#0072ff);
 }
+
+/* القلوب */
+.heart{
+position:absolute;
+color:red;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+
 </style>
 </head>
 <body>
 
-<!-- login -->
-<div class="card" id="login">
+<div class="glass" id="loginBox">
 
-<div class="name">💜 مرحباً</div>
+<div class="title">💜 مرحباً</div>
 
-<input type="password" id="pass" placeholder="ادخل الباسورد">
+<input type="password" id="password" placeholder="ادخل الباسورد">
 
 <br>
 
@@ -153,100 +135,75 @@ display:none;
 
 </div>
 
+<div class="glass" id="profileBox" style="display:none">
 
-<!-- profile -->
-<div class="card hidden" id="profile">
+<div class="title" id="name"></div>
 
-<div class="name" id="pname"></div>
+<div class="avatar" id="avatar"></div>
 
-<div class="avatar">
-<img id="pimg" src="">
-</div>
-
-<div class="message" id="pmsg"></div>
-
-<div class="counter">
-
-<div class="box">
-<div class="num" id="years">0</div>
-<div class="label">سنة</div>
-</div>
-
-<div class="box">
-<div class="num" id="months">0</div>
-<div class="label">شهر</div>
-</div>
-
-<div class="box">
-<div class="num" id="days">0</div>
-<div class="label">يوم</div>
-</div>
-
-</div>
-
-<button onclick="back()">رجوع</button>
-
-</div>
-
+<button onclick="playMusic()">▶ تشغيل الأغنية</button>
 
 <audio id="music"></audio>
 
+<div class="counter" id="counter"></div>
+
+<button class="back" onclick="back()">رجوع</button>
+
+</div>
 
 <script>
 
-const people = {
+/* الباسورد الرئيسي */
+const mainPassword="love";
+
+/* البيانات */
+const people={
 
 "eman2002":{
 name:"Eman",
-img:"eman.jpg",
-msg:"اختي الغاليه ربنا يخليكي ليا ❤️",
 birth:"2002-02-12",
+image:"eman.jpg",
 music:"eman.mp3"
 },
 
 "zainab2000":{
 name:"Zainab",
-img:"zainab.jpg",
-msg:"اجمل اخت في الدنيا 💜",
 birth:"2000-09-16",
+image:"zainab.jpg",
 music:"zainab.mp3"
 },
 
 "rokaya2005":{
 name:"Rokaya",
-img:"rokaya.jpg",
-msg:"ربنا يحفظك دايما ❤️",
 birth:"2005-12-12",
+image:"rokaya.jpg",
 music:"rokaya.mp3"
 }
 
 };
 
+let currentPerson=null;
 
+/* تسجيل الدخول */
 function login(){
 
-const pass=document.getElementById("pass").value;
+let pass=document.getElementById("password").value;
 
-if(people[pass]){
+if(pass===mainPassword){
 
-const p=people[pass];
+alert("اختار باسورد الشخص");
 
-document.getElementById("login").classList.add("hidden");
+}
 
-document.getElementById("profile").classList.remove("hidden");
+else if(people[pass]){
 
-document.getElementById("pname").innerText=p.name;
+currentPerson=people[pass];
 
-document.getElementById("pimg").src=p.img;
+showProfile();
 
-document.getElementById("pmsg").innerText=p.msg;
+}
 
-document.getElementById("music").src=p.music;
-document.getElementById("music").play();
-
-calcAge(p.birth);
-
-}else{
+else{
 
 alert("الباسورد غلط");
 
@@ -254,15 +211,39 @@ alert("الباسورد غلط");
 
 }
 
+/* عرض الصفحة */
+function showProfile(){
 
-function calcAge(birth){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("profileBox").style.display="block";
 
-const b=new Date(birth);
-const now=new Date();
+document.getElementById("name").innerText=currentPerson.name;
 
-let years=now.getFullYear()-b.getFullYear();
-let months=now.getMonth()-b.getMonth();
-let days=now.getDate()-b.getDate();
+document.getElementById("avatar").style.backgroundImage=
+"url('"+currentPerson.image+"')";
+
+document.getElementById("music").src=currentPerson.music;
+
+updateCounter();
+
+}
+
+/* تشغيل الأغنية */
+function playMusic(){
+
+document.getElementById("music").play();
+
+}
+
+/* العداد */
+function updateCounter(){
+
+let birth=new Date(currentPerson.birth);
+let now=new Date();
+
+let years=now.getFullYear()-birth.getFullYear();
+let months=now.getMonth()-birth.getMonth();
+let days=now.getDate()-birth.getDate();
 
 if(days<0){
 months--;
@@ -274,18 +255,35 @@ years--;
 months+=12;
 }
 
-document.getElementById("years").innerText=years;
-document.getElementById("months").innerText=months;
-document.getElementById("days").innerText=days;
+document.getElementById("counter").innerHTML=
+years+" سنة 💜 "+months+" شهر 💜 "+days+" يوم";
 
 }
 
+setInterval(updateCounter,1000);
 
+/* رجوع */
 function back(){
 
-location.reload();
+document.getElementById("profileBox").style.display="none";
+document.getElementById("loginBox").style.display="block";
 
 }
+
+/* قلوب متحركة */
+setInterval(()=>{
+
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*20)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+
+},500);
 
 </script>
 
