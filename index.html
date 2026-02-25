@@ -3,196 +3,231 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TikTok Style Login</title>
+<title>اخواتي 💜</title>
 
 <style>
+
 body{
 margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#0f0f0f;
 font-family:Tahoma;
-overflow:hidden;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+text-align:center;
+color:#333;
 }
 
-/* خلفية نيون متحركة */
-body::before{
-content:"";
-position:absolute;
-width:300px;
-height:300px;
-background:radial-gradient(circle,#ff0050,#00f2ea);
-filter:blur(120px);
-animation:move 6s infinite alternate;
-opacity:0.4;
-}
-
-@keyframes move{
-0%{transform:translate(-150px,-100px);}
-100%{transform:translate(150px,100px);}
-}
-
-/* الكارد */
+/* صندوق */
 .box{
-position:relative;
-background:rgba(255,255,255,0.05);
-padding:40px;
-border-radius:25px;
-text-align:center;
-backdrop-filter:blur(20px);
-box-shadow:0 0 40px rgba(255,0,80,0.4);
-width:320px;
-z-index:2;
-animation:fadeIn 1s ease;
+background:white;
+margin:30px;
+padding:20px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
 }
 
-@keyframes fadeIn{
-from{opacity:0;transform:scale(0.8);}
-to{opacity:1;transform:scale(1);}
-}
-
-/* الدائرة */
-.circle{
-width:180px;
-height:180px;
-margin:auto;
-position:relative;
-}
-
-svg{
-transform:rotate(-90deg);
-}
-
-circle{
-fill:none;
-stroke-width:12;
-stroke-linecap:round;
-}
-
-.bg{
-stroke:#222;
-}
-
-.progress{
-stroke:url(#grad);
-stroke-dasharray:502;
-stroke-dashoffset:502;
-transition:stroke-dashoffset 0.1s linear;
-}
-
-/* الرقم */
-.percent{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-color:white;
-font-size:28px;
-font-weight:bold;
-}
-
-/* النص */
-.title{
-color:white;
-margin-top:20px;
-font-size:20px;
-}
-
-/* الإدخال */
-input{
-width:100%;
-padding:12px;
-border-radius:15px;
-border:none;
-margin-top:15px;
-font-size:16px;
-text-align:center;
-background:#1e1e1e;
-color:white;
-outline:none;
-}
-
-/* الزر */
+/* زر */
 button{
-margin-top:15px;
-width:100%;
-padding:12px;
+padding:10px 20px;
+margin:10px;
 border:none;
-border-radius:15px;
-background:linear-gradient(45deg,#ff0050,#00f2ea);
+border-radius:10px;
+background:#ff4d6d;
 color:white;
-font-size:18px;
+font-size:16px;
 cursor:pointer;
-transition:0.3s;
 }
 
 button:hover{
-transform:scale(1.05);
-box-shadow:0 0 20px #ff0050;
+background:#e63950;
+}
+
+/* input */
+input{
+padding:10px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+/* صورة */
+img{
+width:200px;
+border-radius:15px;
+margin-top:10px;
+}
+
+/* الاسم */
+.name{
+font-size:24px;
+color:#ff4d6d;
+margin-top:10px;
+}
+
+/* الرسالة */
+.msg{
+margin-top:10px;
+font-size:18px;
+}
+
+/* العداد */
+.age{
+margin-top:10px;
+color:#555;
 }
 
 </style>
 </head>
 <body>
 
-<div class="box">
+<audio id="mainMusic" src="main.mp3" loop></audio>
+<audio id="zMusic" src="zainab.mp3" loop></audio>
+<audio id="eMusic" src="eman.mp3" loop></audio>
+<audio id="rMusic" src="rokia.mp3" loop></audio>
 
-<div class="circle">
-<svg width="180" height="180">
+<!-- صفحة الباسورد -->
+<div id="login" class="box">
 
-<defs>
-<linearGradient id="grad">
-<stop offset="0%" stop-color="#ff0050"/>
-<stop offset="100%" stop-color="#00f2ea"/>
-</linearGradient>
-</defs>
+<h2>ادخل الباسورد</h2>
 
-<circle class="bg" cx="90" cy="90" r="80"/>
-<circle class="progress" cx="90" cy="90" r="80"/>
-</svg>
+<input type="password" id="mainPass">
 
-<div class="percent">0%</div>
+<br>
+
+<button onclick="login()">دخول</button>
+
 </div>
 
-<div class="title">جاري التحقق...</div>
+<!-- الصفحة الرئيسية -->
+<div id="home" style="display:none" class="box">
 
-<input type="password" placeholder="ادخل الباسورد">
-<button onclick="startLoading()">دخول</button>
+<h2>اخواتي وحبايب قلبي 💜</h2>
+
+<p>اضغطي على اسمك</p>
+
+<button onclick="openPage('zainab')">Zainab</button>
+<button onclick="openPage('eman')">Eman</button>
+<button onclick="openPage('rokia')">Rokia</button>
+
+</div>
+
+<!-- زينب -->
+<div id="zainab" style="display:none" class="box">
+
+<div class="name">Zainab</div>
+
+<img src="zainab.jpg">
+
+<div class="msg">
+اختي الكبيره الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر 🤲❤
+</div>
+
+<div class="age" id="ageZ"></div>
+
+<button onclick="back()">رجوع</button>
+
+</div>
+
+<!-- ايمان -->
+<div id="eman" style="display:none" class="box">
+
+<div class="name">Eman</div>
+
+<img src="eman.jpg">
+
+<div class="msg">
+اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر 🤲❤
+</div>
+
+<div class="age" id="ageE"></div>
+
+<button onclick="back()">رجوع</button>
+
+</div>
+
+<!-- رقية -->
+<div id="rokia" style="display:none" class="box">
+
+<div class="name">Rokia</div>
+
+<img src="rokia.jpg">
+
+<div class="msg">
+اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر 🤲❤
+</div>
+
+<div class="age" id="ageR"></div>
+
+<button onclick="back()">رجوع</button>
 
 </div>
 
 <script>
 
-let percent = 0;
-let progress = document.querySelector(".progress");
-let text = document.querySelector(".percent");
-let title = document.querySelector(".title");
+const PASSWORD="love";
 
-function startLoading(){
+const zDate=new Date("2000-09-16");
+const eDate=new Date("2002-02-12");
+const rDate=new Date("2005-12-12");
 
-percent = 0;
+function login(){
 
-let interval = setInterval(()=>{
+let pass=document.getElementById("mainPass").value;
 
-percent++;
-text.innerHTML = percent + "%";
+if(pass===PASSWORD){
 
-let offset = 502 - (502 * percent / 100);
-progress.style.strokeDashoffset = offset;
+login.style.display="none";
+home.style.display="block";
 
-if(percent >= 100){
-clearInterval(interval);
-title.innerHTML = "تم الدخول بنجاح ❤️";
-setTimeout(()=>{
-window.location.href="https://tiktok.com";
-},1000);
-}
+mainMusic.play();
 
-},30);
+}else{
+
+alert("الباسورد غلط");
 
 }
+
+}
+
+function openPage(name){
+
+home.style.display="none";
+
+mainMusic.pause();
+zMusic.pause();
+eMusic.pause();
+rMusic.pause();
+
+document.getElementById(name).style.display="block";
+
+if(name=="zainab") zMusic.play();
+if(name=="eman") eMusic.play();
+if(name=="rokia") rMusic.play();
+
+}
+
+function back(){
+
+zainab.style.display="none";
+eman.style.display="none";
+rokia.style.display="none";
+
+home.style.display="block";
+
+mainMusic.play();
+
+}
+
+function calcAge(birth){
+
+let now=new Date();
+
+let age=now.getFullYear()-birth.getFullYear();
+
+return "العمر: "+age+" سنة";
+
+}
+
+ageZ.innerHTML=calcAge(zDate);
+ageE.innerHTML=calcAge(eDate);
+ageR.innerHTML=calcAge(rDate);
 
 </script>
 
