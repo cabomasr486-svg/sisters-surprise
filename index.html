@@ -2,76 +2,237 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>اخواتي وروح قلبي ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Sisters ❤️</title>
 
 <style>
 
+/* Reset */
+
 body{
 margin:0;
+background:black;
 font-family:Arial;
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
+overflow:hidden;
 text-align:center;
-overflow-x:hidden;
 }
 
-/* الكافر */
-#cover{
+/* النجوم */
+
+.stars{
 position:fixed;
-top:0;
-left:0;
+width:100%;
+height:100%;
+background:url("https://www.transparenttextures.com/patterns/stardust.png");
+animation:starsMove 100s linear infinite;
+z-index:-3;
+}
+
+@keyframes starsMove{
+from{background-position:0 0}
+to{background-position:10000px 5000px}
+}
+
+/* دخان */
+
+.smoke{
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle at center,rgba(255,255,255,0.08),transparent);
+animation:smokeMove 8s infinite alternate ease-in-out;
+z-index:-2;
+}
+
+@keyframes smokeMove{
+from{transform:scale(1)}
+to{transform:scale(1.4)}
+}
+
+/* loading */
+
+#loading{
+position:fixed;
 width:100%;
 height:100%;
 background:black;
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:10;
+flex-direction:column;
+z-index:999;
 }
 
-#cover img{
-width:300px;
+.loader{
+border:5px solid transparent;
+border-top:5px solid pink;
+border-radius:50%;
+width:80px;
+height:80px;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+.loadingText{
+margin-top:20px;
+font-size:22px;
+animation:glow 2s infinite alternate;
+}
+
+/* glow */
+
+@keyframes glow{
+from{text-shadow:0 0 10px pink}
+to{text-shadow:0 0 30px red,0 0 50px pink}
+}
+
+/* login */
+
+#login{
+display:none;
+position:fixed;
+width:100%;
+height:100%;
+background:url("cover.jpg") center/cover no-repeat;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+.loginBox{
+background:rgba(0,0,0,0.5);
+padding:30px;
 border-radius:20px;
-box-shadow:0 0 30px #ff00cc;
+backdrop-filter:blur(10px);
+box-shadow:0 0 40px pink;
+}
+
+input,button{
+padding:12px;
+border:none;
+border-radius:20px;
+margin-top:10px;
+font-size:18px;
+}
+
+/* main */
+
+#mainPage{
+display:none;
+padding-top:40px;
+}
+
+.cover{
+width:240px;
+border-radius:20px;
+box-shadow:0 0 40px pink;
+animation:float 4s infinite;
+}
+
+@keyframes float{
+50%{transform:translateY(-15px)}
+}
+
+/* cards 3D */
+
+.cards{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.card{
+width:180px;
+height:240px;
+perspective:1000px;
 cursor:pointer;
 }
 
-/* الكارت الزجاجي */
-.card{
-margin:20px auto;
-padding:20px;
-width:300px;
+.cardInner{
+width:100%;
+height:100%;
+position:relative;
+transform-style:preserve-3d;
+transition:1s;
+}
+
+.card:hover .cardInner{
+transform:rotateY(180deg);
+}
+
+.cardFront,.cardBack{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
 border-radius:20px;
 background:rgba(255,255,255,0.1);
 backdrop-filter:blur(10px);
-box-shadow:0 0 20px rgba(255,255,255,0.3);
-cursor:pointer;
-transition:0.5s;
+box-shadow:0 0 30px pink;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 }
 
-.card:hover{
-transform:scale(1.05);
-box-shadow:0 0 40px #ff00cc;
-}
-
-/* الصورة */
-.card img{
-width:100%;
+.cardFront img{
+width:140px;
 border-radius:15px;
 }
 
-/* الاسم بنور */
-.name{
-font-size:24px;
-margin-top:10px;
-text-shadow:0 0 10px #fff,0 0 20px #ff00cc,0 0 40px #ff00cc;
+.cardBack{
+transform:rotateY(180deg);
+font-size:22px;
 }
 
-/* الرسالة */
-.message{
+/* private */
+
+#privatePage{
 display:none;
-margin-top:10px;
-font-size:18px;
+padding-top:40px;
+}
+
+#privatePage img{
+width:260px;
+border-radius:20px;
+box-shadow:0 0 40px pink;
+animation:zoom 2s;
+}
+
+@keyframes zoom{
+from{transform:scale(0)}
+to{transform:scale(1)}
+}
+
+/* typing */
+
+.typing{
+border-right:3px solid white;
+display:inline-block;
+padding-right:5px;
+font-size:20px;
+margin-top:15px;
+}
+
+/* hearts */
+
+.heart{
+position:fixed;
+bottom:-10px;
+animation:hearts 5s linear infinite;
+}
+
+@keyframes hearts{
+to{
+transform:translateY(-100vh);
+opacity:0;
+}
 }
 
 </style>
@@ -79,69 +240,225 @@ font-size:18px;
 
 <body>
 
-<!-- الكافر -->
-<div id="cover">
-<img src="cover.gif" onclick="enterSite()">
+<div class="stars"></div>
+<div class="smoke"></div>
+
+<!-- loading -->
+
+<div id="loading">
+
+<div class="loader"></div>
+
+<div class="loadingText">Loading cinematic experience...</div>
+
 </div>
 
-<!-- الصوت العام -->
-<audio id="mainMusic" loop>
-<source src="main.mp3">
-</audio>
+<!-- login -->
 
-<h1>اخواتي وحبايب قلبي ❤️</h1>
+<div id="login">
 
-<div class="card" onclick="openCard('eman')">
-<img src="eman-2.jpg">
-<div class="name">ايمان ✨</div>
-<div class="message" id="eman-msg">
-اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شراو مكروه ويفرحك علطول واتمني اشوفك اكتر مابتخيل 🤲🫶🥺❤
-</div>
-</div>
+<div class="loginBox">
 
-<div class="card" onclick="openCard('rokia')">
-<img src="rokia-2.jpg">
-<div class="name">رقيه ✨</div>
-<div class="message" id="rokia-msg">
-اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شراو مكروه ويفرحك علطول واتمني اشوفك اكتر مابتخيل 🤲🫶🥺❤
-</div>
+<h2 class="loadingText">Enter Love Password ❤️</h2>
+
+<input type="password" id="pass">
+
+<br>
+
+<button onclick="enter()">دخول</button>
+
 </div>
 
-<div class="card" onclick="openCard('zainab')">
-<img src="zainab-2.jpg">
-<div class="name">زينب ✨</div>
-<div class="message" id="zainab-msg">
-اختي الكبيره الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شراو مكروه ويفرحك علطول واتمني اشوفك اكتر مابتخيل 🤲🫶🥺❤
+</div>
+
+<!-- main -->
+
+<div id="mainPage">
+
+<img src="cover.jpg" class="cover">
+
+<h1 class="loadingText">اخواتي وحبايب قلبي ❤️</h1>
+
+<p onclick="showMsg()">اضغطي هنا لرسالة خاصة 💌</p>
+
+<p id="msg" class="typing"></p>
+
+<div class="cards">
+
+<div class="card" onclick="openPerson('zainab')">
+<div class="cardInner">
+
+<div class="cardFront">
+<img src="zainab.jpg">
+</div>
+
+<div class="cardBack">
+Zainab ✨
+</div>
+
 </div>
 </div>
 
-<audio id="eman-music"><source src="eman.mp3"></audio>
-<audio id="rokia-music"><source src="rokia.mp3"></audio>
-<audio id="zainab-music"><source src="zainab.mp3"></audio>
+<div class="card" onclick="openPerson('eman')">
+<div class="cardInner">
+
+<div class="cardFront">
+<img src="eman.jpg">
+</div>
+
+<div class="cardBack">
+Eman ✨
+</div>
+
+</div>
+</div>
+
+<div class="card" onclick="openPerson('rokaia')">
+<div class="cardInner">
+
+<div class="cardFront">
+<img src="rokaia.jpg">
+</div>
+
+<div class="cardBack">
+Rokaia ✨
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- private -->
+
+<div id="privatePage">
+
+<img id="personImg">
+
+<h1 id="personName" class="loadingText"></h1>
+
+<p id="personMsg" class="typing"></p>
+
+</div>
+
+<audio id="mainMusic" src="main.mp3" loop></audio>
+<audio id="zainabMusic" src="zainab.mp3" loop></audio>
+<audio id="emanMusic" src="eman.mp3" loop></audio>
+<audio id="rokaiaMusic" src="rokaia.mp3" loop></audio>
 
 <script>
 
-function enterSite(){
-document.getElementById("cover").style.display="none";
-document.getElementById("mainMusic").play();
+/* loading */
+
+setTimeout(()=>{
+loading.style.display="none"
+login.style.display="flex"
+},3000)
+
+const mainMusic=document.getElementById("mainMusic")
+
+const music={
+zainab:zainabMusic,
+eman:emanMusic,
+rokaia:rokaiaMusic
 }
 
-function openCard(name){
-
-let password=prompt("اكتب الباسورد");
-
-if(password!="love"){
-alert("غلط ❌");
-return;
+const passwords={
+zainab:"زوزه",
+eman:"إيمي",
+rokaia:"رورو"
 }
 
-document.getElementById(name+"-msg").style.display="block";
+const messages={
+zainab:"اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك ❤️",
+eman:"اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك ❤️",
+rokaia:"اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك ❤️"
+}
 
-document.getElementById("eman-music").pause();
-document.getElementById("rokia-music").pause();
-document.getElementById("zainab-music").pause();
+function enter(){
 
-document.getElementById(name+"-music").play();
+if(pass.value==="love"){
+
+login.style.display="none"
+mainPage.style.display="block"
+
+mainMusic.play()
+
+hearts()
+
+}else alert("Wrong password")
+
+}
+
+function openPerson(name){
+
+let p=prompt("الباسورد")
+
+if(p===passwords[name]){
+
+mainMusic.pause()
+
+for(let m in music)music[m].pause()
+
+music[name].play()
+
+mainPage.style.display="none"
+
+privatePage.style.display="block"
+
+personImg.src=name+".jpg"
+
+personName.innerText=name
+
+typeText(personMsg,messages[name])
+
+}else alert("غلط")
+
+}
+
+/* typing */
+
+function typeText(el,text){
+
+el.innerHTML=""
+
+let i=0
+
+let interval=setInterval(()=>{
+
+el.innerHTML+=text[i]
+
+i++
+
+if(i>=text.length)clearInterval(interval)
+
+},40)
+
+}
+
+/* hearts */
+
+function hearts(){
+
+setInterval(()=>{
+
+let h=document.createElement("div")
+
+h.innerHTML="❤️"
+
+h.className="heart"
+
+h.style.left=Math.random()*100+"vw"
+
+h.style.fontSize=Math.random()*30+20+"px"
+
+document.body.appendChild(h)
+
+setTimeout(()=>h.remove(),5000)
+
+},300)
 
 }
 
