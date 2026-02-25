@@ -3,156 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secret Page ❤️</title>
+<title>💜 اخواتي وروحي</title>
 
 <style>
 
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(135deg,#0f001a,#1a0033,#000);
+background:black;
 color:white;
 text-align:center;
 overflow:hidden;
 }
 
-.page{
+/* خلفية النجوم */
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:url("https://i.imgur.com/YKY28eT.jpg");
+background-size:cover;
+z-index:-2;
+}
+
+/* القلوب */
+.heart{
+position:fixed;
+color:red;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:0;}
+100%{transform:translateY(-10vh);opacity:1;}
+}
+
+/* كارت */
+.card{
+background:rgba(255,255,255,0.08);
+padding:25px;
+margin:20px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+}
+
+/* input */
+input{
+padding:12px;
+border-radius:10px;
+border:none;
+width:200px;
+font-size:16px;
+}
+
+/* button */
+button{
+padding:12px 25px;
+border:none;
+border-radius:12px;
+background:linear-gradient(45deg,purple,pink);
+color:white;
+font-size:18px;
+margin-top:10px;
+}
+
+/* loading */
+#loading{
 display:none;
-height:100vh;
+position:fixed;
+width:100%;
+height:100%;
+background:black;
 justify-content:center;
 align-items:center;
 flex-direction:column;
 }
 
-.active{
-display:flex;
-}
-
-.card{
-background:rgba(255,255,255,0.05);
-padding:30px;
-border-radius:20px;
-backdrop-filter:blur(10px);
-box-shadow:0 0 30px rgba(255,0,150,0.3);
-width:85%;
-max-width:350px;
-}
-
-/* TikTok Loader */
-
-.loader-circle{
-
-width:120px;
-height:120px;
+.loader{
+border:6px solid #333;
+border-top:6px solid pink;
 border-radius:50%;
-border:6px solid rgba(255,255,255,0.1);
-border-top:6px solid #ff0080;
-border-right:6px solid #8000ff;
-
+width:60px;
+height:60px;
 animation:spin 1s linear infinite;
-
-display:flex;
-align-items:center;
-justify-content:center;
-margin:auto;
-}
-
-.loader-heart{
-
-font-size:35px;
-animation:pulse 1s infinite;
-
 }
 
 @keyframes spin{
-
-0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
-
 }
 
-@keyframes pulse{
-
-0%,100%{transform:scale(1);}
-50%{transform:scale(1.3);}
-
-}
-
-.dots{
-margin-top:15px;
-}
-
-.dot{
-display:inline-block;
-width:8px;
-height:8px;
-background:#ff0080;
-border-radius:50%;
-margin:5px;
-animation:bounce 1s infinite alternate;
-}
-
-.dot:nth-child(2){animation-delay:.2s;}
-.dot:nth-child(3){animation-delay:.4s;}
-
-@keyframes bounce{
-from{transform:translateY(0);}
-to{transform:translateY(-10px);}
-}
-
-/* Input */
-
-input{
-
-width:90%;
-padding:12px;
-border:none;
-border-radius:10px;
-margin-top:15px;
-font-size:16px;
-text-align:center;
-
-}
-
-button{
-
-margin-top:15px;
-padding:12px 30px;
-border:none;
-border-radius:12px;
-font-size:18px;
-background:linear-gradient(45deg,#ff0080,#8000ff);
-color:white;
-cursor:pointer;
-
-}
-
-/* Image */
+/* الصفحة العامة */
+#home{display:none;}
+#person{display:none;}
 
 img{
-
-width:160px;
-height:160px;
-border-radius:50%;
-margin:15px;
-border:4px solid #ff0080;
-object-fit:cover;
-
+width:200px;
+border-radius:20px;
+margin-top:10px;
 }
 
-/* Hearts */
-
-.heart{
-position:absolute;
-color:red;
-animation:fall linear infinite;
+.name{
+font-size:28px;
+color:pink;
+text-shadow:0 0 10px pink;
 }
 
-@keyframes fall{
-
-0%{transform:translateY(-100px);}
-100%{transform:translateY(100vh);}
-
+/* عداد */
+.age{
+margin-top:10px;
+font-size:18px;
+color:lightblue;
 }
 
 </style>
@@ -160,56 +121,49 @@ animation:fall linear infinite;
 
 <body>
 
-<div id="hearts"></div>
+<!-- loading -->
+<div id="loading">
+<div class="loader"></div>
+<h2>جاري التحميل السينمائي ❤️</h2>
+</div>
 
-<!-- Login -->
-<div id="loginPage" class="page active">
-
-<div class="card">
-
-<h2>توأني يا روحي 😂❤️</h2>
-
-<input type="password" id="pass" placeholder="ادخل الباسورد">
-
+<!-- login -->
+<div id="login" class="card">
+<h2>❤️ ادخل الباسورد</h2>
+<input id="pass" placeholder="الباسورد">
+<br>
 <button onclick="login()">دخول</button>
-
 </div>
 
-</div>
-
-<!-- Loading TikTok Style -->
-<div id="loadingPage" class="page">
-
-<div>
-
-<div class="loader-circle">
-<div class="loader-heart">❤️</div>
-</div>
-
-<div style="margin-top:20px;font-size:20px">
-جاري التحميل السينمائي
-</div>
-
-<div class="dots">
-<span class="dot"></span>
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-
-</div>
-
-</div>
-
-<!-- Content -->
-<div id="contentPage" class="page">
+<!-- الصفحة العامة -->
+<div id="home">
 
 <div class="card">
 
-<h2 id="name"></h2>
+<img src="cover.gif">
 
-<img id="photo">
+<h2>اخواتي وحبايب قلبي 🥺❤️</h2>
 
-<p id="message"></p>
+<button onclick="openPerson('zainab')">زينب</button>
+<button onclick="openPerson('eman')">إيمان</button>
+<button onclick="openPerson('rokaia')">رقية</button>
+
+</div>
+
+</div>
+
+<!-- صفحة الشخص -->
+<div id="person">
+
+<div class="card">
+
+<div class="name" id="personName"></div>
+
+<img id="personImg">
+
+<div id="personMsg"></div>
+
+<div class="age" id="age"></div>
 
 <button onclick="back()">رجوع</button>
 
@@ -217,46 +171,55 @@ animation:fall linear infinite;
 
 </div>
 
-<audio id="audio"></audio>
+<!-- الموسيقى -->
+<audio id="mainMusic" src="main.mp3" loop></audio>
+<audio id="music"></audio>
 
 <script>
 
-/* البيانات */
-
+// البيانات
 const data={
 
-"زوزه":{
-name:"زينب ❤️",
+love:true,
+
+zainab:{
+pass:"زوزه",
 img:"zainab.jpg",
-audio:"zainab.mp3",
-msg:"اختي الغاليه ربنا يخليكي ليا ❤️"
+music:"zainab.mp3",
+birth:"2000-09-16",
+msg:"اختي الكبيره الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر ❤️"
 },
 
-"ايمي":{
-name:"إيمان ❤️",
+eman:{
+pass:"إيمي",
 img:"eman.jpg",
-audio:"eman.mp3",
-msg:"ربنا يحفظك ويخليكي ليا ❤️"
+music:"eman.mp3",
+birth:"2002-02-12",
+msg:"اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر ❤️"
 },
 
-"رورو":{
-name:"رقيه ❤️",
+rokaia:{
+pass:"رورو",
 img:"rokaia.jpg",
-audio:"rokaia.mp3",
-msg:"ربنا يخليكي ليا دايما ❤️"
+music:"rokaia.mp3",
+birth:"2005-12-12",
+msg:"اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر ❤️"
 }
 
 };
 
-/* login */
-
+// login
 function login(){
 
-const pass=document.getElementById("pass").value;
+const p=document.getElementById("pass").value;
 
-if(data[pass]){
+if(p==="love"){
 
-showLoading(pass);
+showLoading(()=>{
+document.getElementById("login").style.display="none";
+document.getElementById("home").style.display="block";
+document.getElementById("mainMusic").play();
+});
 
 }else{
 
@@ -266,79 +229,94 @@ alert("الباسورد غلط");
 
 }
 
-/* loading */
+// loading
+function showLoading(callback){
 
-function showLoading(pass){
-
-document.getElementById("loginPage").classList.remove("active");
-
-document.getElementById("loadingPage").classList.add("active");
+document.getElementById("loading").style.display="flex";
 
 setTimeout(()=>{
-
-showContent(pass);
-
-},2500);
-
-}
-
-/* show content */
-
-function showContent(pass){
-
-const person=data[pass];
-
-document.getElementById("loadingPage").classList.remove("active");
-
-document.getElementById("contentPage").classList.add("active");
-
-document.getElementById("name").innerText=person.name;
-
-document.getElementById("photo").src=person.img;
-
-document.getElementById("message").innerText=person.msg;
-
-const audio=document.getElementById("audio");
-
-audio.src=person.audio;
-
-audio.play();
+document.getElementById("loading").style.display="none";
+callback();
+},2000);
 
 }
 
-/* back */
+// فتح الشخص
+function openPerson(name){
 
+const p=prompt("ادخل الباسورد");
+
+if(p===data[name].pass){
+
+document.getElementById("home").style.display="none";
+document.getElementById("person").style.display="block";
+
+document.getElementById("personName").innerHTML=name;
+document.getElementById("personImg").src=data[name].img;
+document.getElementById("personMsg").innerHTML=data[name].msg;
+
+playMusic(data[name].music);
+
+startAge(data[name].birth);
+
+}else{
+
+alert("غلط");
+
+}
+
+}
+
+// رجوع
 function back(){
 
-document.getElementById("contentPage").classList.remove("active");
+document.getElementById("person").style.display="none";
+document.getElementById("home").style.display="block";
 
-document.getElementById("loginPage").classList.add("active");
-
-document.getElementById("audio").pause();
+document.getElementById("music").pause();
+document.getElementById("mainMusic").play();
 
 }
 
-/* hearts */
+// music
+function playMusic(src){
 
-function heart(){
+document.getElementById("mainMusic").pause();
 
+const m=document.getElementById("music");
+m.src=src;
+m.play();
+
+}
+
+// عداد العمر
+function startAge(birth){
+
+setInterval(()=>{
+
+const b=new Date(birth);
+const now=new Date();
+
+let y=now.getFullYear()-b.getFullYear();
+let m=now.getMonth()-b.getMonth();
+let d=now.getDate()-b.getDate();
+
+document.getElementById("age").innerHTML=
+y+" سنة "+m+" شهر "+d+" يوم";
+
+},1000);
+
+}
+
+// القلوب
+setInterval(()=>{
 const h=document.createElement("div");
-
 h.className="heart";
-
 h.innerHTML="❤️";
-
 h.style.left=Math.random()*100+"%";
-
-h.style.animationDuration=(Math.random()*3+3)+"s";
-
 document.body.appendChild(h);
-
 setTimeout(()=>h.remove(),6000);
-
-}
-
-setInterval(heart,400);
+},500);
 
 </script>
 
