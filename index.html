@@ -7,319 +7,388 @@
 
 <style>
 
-/* الخلفية */
-
 body{
 margin:0;
 font-family:Arial;
-background: linear-gradient(135deg,#1a002b,#5f0a87,#ff4e8a);
+background:linear-gradient(135deg,#3a0066,#7a00cc,#ff4da6);
 color:white;
 text-align:center;
+min-height:100vh;
 overflow-x:hidden;
 }
 
-/* شاشة */
+/* شاشة الباسورد */
 
-.screen{
+#passwordScreen{
+position:fixed;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:linear-gradient(135deg,#3a0066,#7a00cc);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+input{
+padding:12px;
+border:none;
+border-radius:10px;
+margin-top:10px;
+font-size:18px;
+text-align:center;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:15px;
+margin-top:15px;
+font-size:18px;
+cursor:pointer;
+background:linear-gradient(45deg,#ff4da6,#ff944d);
+color:white;
+}
+
+/* الرئيسية */
+
+#main{
 display:none;
 padding:20px;
 }
 
-.active{
-display:block;
-}
-
-/* كارت زجاجي */
-
-.glass{
-background: rgba(255,255,255,0.12);
-backdrop-filter: blur(20px);
-border-radius:20px;
-padding:20px;
-margin:15px;
-box-shadow:0 8px 32px rgba(0,0,0,0.4);
-border:1px solid rgba(255,255,255,0.2);
-}
-
-/* الصور */
-
 .cover{
-width:90%;
-max-width:320px;
-border-radius:20px;
-box-shadow:0 0 25px rgba(255,255,255,0.4);
-}
-
-.photo{
 width:200px;
 height:200px;
 border-radius:20px;
 object-fit:cover;
-box-shadow:0 0 25px rgba(255,255,255,0.5);
-}
-
-/* الأزرار */
-
-button{
-background: linear-gradient(45deg,#ff4e8a,#ff9a44);
-border:none;
-padding:12px 25px;
-border-radius:15px;
-color:white;
-font-size:18px;
-margin:10px;
-box-shadow:0 0 15px rgba(255,255,255,0.4);
-cursor:pointer;
-}
-
-/* العداد */
-
-.counter{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
+box-shadow:0 0 25px rgba(255,255,255,0.4);
 margin-top:20px;
 }
 
-.counter div{
-background: rgba(255,255,255,0.15);
-backdrop-filter: blur(10px);
+.nameBtn{
+display:block;
+margin:15px auto;
+width:200px;
+}
+
+/* الصفحات */
+
+.page{
+display:none;
+padding:20px;
+}
+
+.profile{
+width:150px;
+height:150px;
+border-radius:50%;
+object-fit:cover;
+box-shadow:0 0 25px rgba(255,255,255,0.5);
+}
+
+/* العداد الزجاجي */
+
+.counter{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:20px;
+gap:10px;
+}
+
+.box{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+border-radius:15px;
+padding:15px;
+width:90px;
+}
+
+/* الرسالة */
+
+.secret{
+display:none;
+margin-top:20px;
+background:rgba(255,255,255,0.2);
 padding:15px;
 border-radius:15px;
+animation:fade 1s;
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
 }
 
 /* القلوب */
 
 .heart{
 position:fixed;
-color:rgba(255,255,255,0.4);
-animation:float 6s linear infinite;
+color:red;
 font-size:20px;
+animation:fall linear infinite;
 }
 
-@keyframes float{
+@keyframes fall{
 from{
-transform:translateY(100vh);
+transform:translateY(-10vh);
 opacity:1;
 }
 to{
-transform:translateY(-10vh);
+transform:translateY(110vh);
 opacity:0;
 }
 }
 
 </style>
+
 </head>
 <body>
 
-<!-- الصوت العام -->
+<!-- شاشة الباسورد -->
 
-<audio id="mainAudio" autoplay loop>
-<source src="main.mp3" type="audio/mp3">
-</audio>
+<div id="passwordScreen">
 
-<!-- الشاشة الرئيسية -->
+<h2>ادخل الباسورد ❤️</h2>
 
-<div id="home" class="screen active">
+<input type="password" id="passInput">
+
+<button onclick="checkPass()">دخول</button>
+
+</div>
+
+<!-- الرئيسية -->
+
+<div id="main">
 
 <img src="cover.gif" class="cover">
 
-<h2>اخواتي وروح قلبي ❤️</h2>
-
-<button onclick="showScreen('names')">
-اختاري اسمك 🌚♥
-</button>
-
-<div class="glass">
-<h3>ليكو يا حبايب قلبي ❤️</h3>
-
-<p>
-يارب دايما لي أخواتي ومتحرمنيش منهم واشوفهم مبسوطين ومتهنيين ❤️
-</p>
-
-</div>
-
-</div>
-
-<!-- شاشة الاسماء -->
-
-<div id="names" class="screen">
-
 <h2>اختاري اسمك ❤️</h2>
 
-<button onclick="openPerson('eman')">ايمان</button>
-<button onclick="openPerson('rokia')">رقية</button>
-<button onclick="openPerson('zainab')">زينب</button>
+<button class="nameBtn" onclick="openPage('eman')">ايمان</button>
 
-<br>
+<button class="nameBtn" onclick="openPage('rokia')">رقيه</button>
 
-<button onclick="showScreen('home')">رجوع</button>
+<button class="nameBtn" onclick="openPage('zainab')">زينب</button>
 
 </div>
 
-<!-- شاشة ايمان -->
+<!-- ايمان -->
 
-<div id="eman" class="screen">
+<div id="eman" class="page">
 
-<img src="eman.jpg" class="photo">
-
-<div class="glass">
+<img src="eman.jpg" class="profile">
 
 <h2>ايمان ❤️</h2>
 
-<div class="counter" id="counter_eman"></div>
+<div class="counter">
 
-<button onclick="surprise()">اضغطي هنا 🌚❤️</button>
-
-</div>
-
-<button onclick="backNames()">رجوع</button>
-
-<audio autoplay loop>
-<source src="eman.mp3">
-</audio>
+<div class="box"><div id="eman_y"></div>سنة</div>
+<div class="box"><div id="eman_m"></div>شهر</div>
+<div class="box"><div id="eman_d"></div>يوم</div>
+<div class="box"><div id="eman_h"></div>ساعة</div>
+<div class="box"><div id="eman_min"></div>دقيقة</div>
+<div class="box"><div id="eman_s"></div>ثانية</div>
 
 </div>
 
-<!-- شاشة رقية -->
+<button onclick="showSecret('eman_secret')">اضغطي هنا 🌚❤️</button>
 
-<div id="rokia" class="screen">
+<div id="eman_secret" class="secret">
 
-<img src="rokia.jpg" class="photo">
-
-<div class="glass">
-
-<h2>رقية ❤️</h2>
-
-<div class="counter" id="counter_rokia"></div>
-
-<button onclick="surprise()">اضغطي هنا 🌚❤️</button>
+ربنا يخليكي ليا وميحرمنيش منك  
+يا اغلي من عمري ❤🤲🥺
 
 </div>
 
-<button onclick="backNames()">رجوع</button>
-
-<audio autoplay loop>
-<source src="rokia.mp3">
-</audio>
+<button onclick="back()">رجوع</button>
 
 </div>
 
-<!-- شاشة زينب -->
+<!-- رقيه -->
 
-<div id="zainab" class="screen">
+<div id="rokia" class="page">
 
-<img src="zainab.jpg" class="photo">
+<img src="rokia.jpg" class="profile">
 
-<div class="glass">
+<h2>رقيه ❤️</h2>
+
+<div class="counter">
+
+<div class="box"><div id="rokia_y"></div>سنة</div>
+<div class="box"><div id="rokia_m"></div>شهر</div>
+<div class="box"><div id="rokia_d"></div>يوم</div>
+<div class="box"><div id="rokia_h"></div>ساعة</div>
+<div class="box"><div id="rokia_min"></div>دقيقة</div>
+<div class="box"><div id="rokia_s"></div>ثانية</div>
+
+</div>
+
+<button onclick="showSecret('rokia_secret')">اضغطي هنا 🌚❤️</button>
+
+<div id="rokia_secret" class="secret">
+
+ربنا يخليكي ليا وميحرمنيش منك  
+يا اغلي من عمري ❤🤲🥺
+
+</div>
+
+<button onclick="back()">رجوع</button>
+
+</div>
+
+<!-- زينب -->
+
+<div id="zainab" class="page">
+
+<img src="zainab.jpg" class="profile">
 
 <h2>زينب ❤️</h2>
 
-<div class="counter" id="counter_zainab"></div>
+<div class="counter">
 
-<button onclick="surprise()">اضغطي هنا 🌚❤️</button>
+<div class="box"><div id="zainab_y"></div>سنة</div>
+<div class="box"><div id="zainab_m"></div>شهر</div>
+<div class="box"><div id="zainab_d"></div>يوم</div>
+<div class="box"><div id="zainab_h"></div>ساعة</div>
+<div class="box"><div id="zainab_min"></div>دقيقة</div>
+<div class="box"><div id="zainab_s"></div>ثانية</div>
+
+</div>
+
+<button onclick="showSecret('zainab_secret')">اضغطي هنا 🌚❤️</button>
+
+<div id="zainab_secret" class="secret">
+
+ربنا يخليكي ليا وميحرمنيش منك  
+يا اغلي من عمري ❤🤲🥺
 
 </div>
 
-<button onclick="backNames()">رجوع</button>
-
-<audio autoplay loop>
-<source src="zainab.mp3">
-</audio>
+<button onclick="back()">رجوع</button>
 
 </div>
+
+<!-- الصوت -->
+
+<audio id="mainAudio" src="main.mp3" loop></audio>
+<audio id="emanAudio" src="eman.mp3" loop></audio>
+<audio id="rokiaAudio" src="rokia.mp3" loop></audio>
+<audio id="zainabAudio" src="zainab.mp3" loop></audio>
 
 <script>
 
-/* تغيير الشاشة */
+/* الباسورد */
 
-function showScreen(id){
+function checkPass(){
 
-document.querySelectorAll(".screen")
-.forEach(s=>s.classList.remove("active"))
+if(document.getElementById("passInput").value==="love"){
 
-document.getElementById(id)
-.classList.add("active")
+document.getElementById("passwordScreen").style.display="none";
+
+document.getElementById("main").style.display="block";
+
+playAudio("mainAudio");
+
+}
+}
+
+/* تشغيل صوت */
+
+function playAudio(id){
+
+document.getElementById("mainAudio").pause();
+document.getElementById("emanAudio").pause();
+document.getElementById("rokiaAudio").pause();
+document.getElementById("zainabAudio").pause();
+
+document.getElementById(id).play();
 
 }
 
-/* فتح الشخص */
+/* فتح صفحة */
 
-function openPerson(name){
+function openPage(name){
 
-showScreen(name)
+document.getElementById("main").style.display="none";
+
+document.getElementById(name).style.display="block";
+
+playAudio(name+"Audio");
 
 }
 
 /* رجوع */
 
-function backNames(){
+function back(){
 
-showScreen("names")
+document.querySelectorAll(".page").forEach(p=>p.style.display="none");
 
-}
+document.getElementById("main").style.display="block";
 
-/* المفاجأة */
-
-function surprise(){
-
-alert("ربنا يخليكي يا اغلي اخت ف الدنيا 🥺❤️")
+playAudio("mainAudio");
 
 }
 
-/* حساب العداد بدقة */
+/* الرسالة */
 
-function updateCounter(id,date){
+function showSecret(id){
 
-let now=new Date()
-
-let diff=now-date
-
-let seconds=Math.floor(diff/1000)
-let minutes=Math.floor(seconds/60)
-let hours=Math.floor(minutes/60)
-let days=Math.floor(hours/24)
-let years=Math.floor(days/365)
-
-days%=365
-hours%=24
-minutes%=60
-seconds%=60
-
-document.getElementById(id).innerHTML=`
-
-<div>${years}<br>سنة</div>
-<div>${days}<br>يوم</div>
-<div>${hours}<br>ساعة</div>
-<div>${minutes}<br>دقيقة</div>
-<div>${seconds}<br>ثانية</div>
-
-`
+document.getElementById(id).style.display="block";
 
 }
+
+/* العداد الحقيقي */
+
+function calc(id, date){
 
 setInterval(()=>{
 
-updateCounter("counter_eman",new Date("2002-02-12"))
-updateCounter("counter_rokia",new Date("2004-01-01"))
-updateCounter("counter_zainab",new Date("2006-01-01"))
+let now=new Date();
 
-},1000)
+let birth=new Date(date);
 
-/* القلوب */
+let diff=now-birth;
+
+let s=Math.floor(diff/1000)%60;
+let m=Math.floor(diff/60000)%60;
+let h=Math.floor(diff/3600000)%24;
+let d=Math.floor(diff/86400000)%30;
+let mo=Math.floor(diff/2592000000)%12;
+let y=Math.floor(diff/31536000000);
+
+document.getElementById(id+"_y").innerText=y;
+document.getElementById(id+"_m").innerText=mo;
+document.getElementById(id+"_d").innerText=d;
+document.getElementById(id+"_h").innerText=h;
+document.getElementById(id+"_min").innerText=m;
+document.getElementById(id+"_s").innerText=s;
+
+},1000);
+
+}
+
+calc("eman","2002-02-12");
+calc("rokia","2005-12-12");
+calc("zainab","2000-09-16");
+
+/* قلوب */
 
 setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤";
+heart.style.left=Math.random()*100+"%";
+heart.style.animationDuration=3+Math.random()*5+"s";
+document.body.appendChild(heart);
 
-let heart=document.createElement("div")
-heart.className="heart"
-heart.innerHTML="❤️"
-heart.style.left=Math.random()*100+"%"
+setTimeout(()=>heart.remove(),8000);
 
-document.body.appendChild(heart)
-
-setTimeout(()=>heart.remove(),6000)
-
-},500)
+},500);
 
 </script>
 
