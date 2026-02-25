@@ -3,180 +3,436 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ليكو ياحبايب قلبي ❤️</title>
+
+<title>اخواتي ❤️</title>
 
 <style>
+
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(135deg,#111,#1c1c1c);
+background: linear-gradient(135deg,#ff4e8a,#6a5cff);
 color:white;
-text-align:center;
+overflow:hidden;
 }
 
+/* شاشة التحميل */
+#loader{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+}
+
+.loader-heart{
+font-size:50px;
+animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+50%{transform:scale(1.3);}
+}
+
+/* الشاشات */
+
 .screen{
+position:absolute;
+width:100%;
+height:100%;
 display:none;
-padding:20px;
-min-height:100vh;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+animation:fade .6s;
 }
 
 .active{
-display:block;
+display:flex;
 }
 
-input{
-padding:12px;
-border:none;
-border-radius:10px;
-margin:10px;
-font-size:16px;
+@keyframes fade{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
 }
+
+/* صورة الكافر */
+
+.cover{
+width:100%;
+height:40%;
+object-fit:cover;
+}
+
+/* الصور */
+
+.photo{
+width:200px;
+height:200px;
+border-radius:20px;
+box-shadow:0 0 20px white;
+margin-top:10px;
+}
+
+/* الأزرار */
 
 button{
 padding:12px 25px;
+margin:8px;
 border:none;
-border-radius:25px;
-background:#ff2e63;
-color:white;
-font-size:16px;
-cursor:pointer;
-margin:10px;
-transition:.3s;
-}
-
-button:hover{
-transform:scale(1.05);
-background:#ff004f;
-}
-
-.cover{
-width:90%;
-max-width:350px;
-border-radius:20px;
-box-shadow:0 0 25px rgba(255,0,100,.5);
-margin-top:20px;
-}
-
-.photo{
-width:85%;
-max-width:300px;
-border-radius:20px;
-margin-top:20px;
-box-shadow:0 0 20px rgba(255,255,255,.3);
-}
-
-.glass{
-background:rgba(255,255,255,.1);
-backdrop-filter:blur(10px);
-padding:15px;
 border-radius:15px;
-margin:20px auto;
-width:80%;
-max-width:300px;
 font-size:18px;
+background:white;
+color:#ff4e8a;
+cursor:pointer;
+box-shadow:0 0 15px rgba(255,255,255,.5);
 }
+
+/* العداد الزجاجي */
+
+.glass-counter{
+background: rgba(255,255,255,0.12);
+backdrop-filter: blur(18px);
+border-radius:20px;
+padding:20px;
+margin-top:15px;
+box-shadow:
+0 8px 32px rgba(0,0,0,0.3),
+inset 0 0 10px rgba(255,255,255,0.2);
+border:1px solid rgba(255,255,255,0.2);
+width:260px;
+}
+
+.time-box{
+display:flex;
+justify-content:space-between;
+margin:6px 0;
+}
+
+/* القلوب */
+
+.heart{
+position:absolute;
+color:red;
+animation:float 5s linear infinite;
+}
+
+@keyframes float{
+from{
+transform:translateY(100vh);
+opacity:1;
+}
+to{
+transform:translateY(-10vh);
+opacity:0;
+}
+}
+
 </style>
 </head>
-
 <body>
 
-<!-- شاشة الباسورد -->
-<div id="login" class="screen active">
-<h2>ادخلي الباسورد 💌</h2>
-<input type="password" id="mainPass" placeholder="الباسورد الرئيسي">
-<br>
-<button onclick="checkMain()">دخول</button>
+<!-- شاشة تحميل -->
+
+<div id="loader">
+
+<div class="loader-heart">❤️</div>
+<h3>جاري التحميل...</h3>
+
 </div>
 
-<!-- الشاشة الرئيسية -->
+<!-- موسيقى عامة -->
+
+<audio id="mainMusic" loop>
+<source src="main.mp3">
+</audio>
+
+<!-- تسجيل الدخول -->
+
+<div id="login" class="screen active">
+
+<h2>ادخل الباسورد ❤️</h2>
+
+<input type="password" id="pass"
+style="padding:10px;font-size:18px;border-radius:10px;border:none;">
+
+<button onclick="login()">دخول</button>
+
+</div>
+
+<!-- الصفحة الرئيسية -->
+
 <div id="home" class="screen">
 
 <img src="cover.gif" class="cover">
 
-<audio id="mainMusic" src="main.mp3" autoplay loop></audio>
+<h3>اختاري اسمك 🌚♥</h3>
 
-<h2>اختاري اسمك 🌚♥</h2>
+<button onclick="openPage('eman','emanMusic')">ايمان</button>
+<button onclick="openPage('rokaia','rokaiaMusic')">رقيه</button>
+<button onclick="openPage('zainab','zainabMusic')">زينب</button>
 
-<button onclick="openPage('eman')">ايمان</button>
-<button onclick="openPage('rokaia')">رقيه</button>
-<button onclick="openPage('zainab')">زينب</button>
+<div style="margin-top:15px">
 
-<p style="margin-top:20px;font-size:17px;">
-انتم نعمة من ربنا في حياتي ❤️  
-وجودكم جنبي أكبر هدية في الدنيا  
-وربنا يخليكو ليا دايماً ياحبايب قلبي 💕
-</p>
-
-<h3>ليكو ياحبايب قلبي ❤️</h3>
+ليكو ياحبايب قلبي ❤️  
+<br>
+انتم اجمل حاجة في حياتي 💖
 
 </div>
 
-<!-- صفحة ايمان -->
+</div>
+
+<!-- ايمان -->
+
 <div id="eman" class="screen">
+
 <h2>ايمان ❤️</h2>
+
 <img src="eman.jpg" class="photo">
-<audio src="eman.mp3" controls></audio>
-<div class="glass" id="count1"></div>
+
+<audio id="emanMusic" loop>
+<source src="eman.mp3">
+</audio>
+
+<div id="count1"></div>
+
+<button onclick="surprise('msg1')">
+اضغطي هنا 🌚❤
+</button>
+
+<div id="msg1"></div>
+
 <button onclick="goHome()">رجوع</button>
+
 </div>
 
-<!-- صفحة رقيه -->
+<!-- رقيه -->
+
 <div id="rokaia" class="screen">
+
 <h2>رقيه ❤️</h2>
+
 <img src="rokaia.jpg" class="photo">
-<audio src="rokaia.mp3" controls></audio>
-<div class="glass" id="count2"></div>
+
+<audio id="rokaiaMusic" loop>
+<source src="rokaia.mp3">
+</audio>
+
+<div id="count2"></div>
+
+<button onclick="surprise('msg2')">
+اضغطي هنا 🌚❤
+</button>
+
+<div id="msg2"></div>
+
 <button onclick="goHome()">رجوع</button>
+
 </div>
 
-<!-- صفحة زينب -->
+<!-- زينب -->
+
 <div id="zainab" class="screen">
+
 <h2>زينب ❤️</h2>
+
 <img src="zainab.jpg" class="photo">
-<audio src="zainab.mp3" controls></audio>
-<div class="glass" id="count3"></div>
+
+<audio id="zainabMusic" loop>
+<source src="zainab.mp3">
+</audio>
+
+<div id="count3"></div>
+
+<button onclick="surprise('msg3')">
+اضغطي هنا 🌚❤
+</button>
+
+<div id="msg3"></div>
+
 <button onclick="goHome()">رجوع</button>
+
 </div>
 
 <script>
 
-function checkMain(){
-let pass=document.getElementById("mainPass").value;
-if(pass==="love"){
-document.getElementById("login").classList.remove("active");
-document.getElementById("home").classList.add("active");
-}else{
-alert("الباسورد غلط 😅");
-}
+/* تحميل */
+
+window.onload=function(){
+
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+},2000);
+
+createHearts();
+
 }
 
-function openPage(id){
-document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-document.getElementById(id).classList.add("active");
+/* تسجيل الدخول */
+
+function login(){
+
+let p=document.getElementById("pass").value;
+
+if(p==="love"){
+
+show("home");
+
+document.getElementById("mainMusic").play();
+
+}else{
+
+alert("الباسورد غلط");
+
 }
+
+}
+
+/* عرض شاشة */
+
+function show(id){
+
+document.querySelectorAll(".screen")
+.forEach(s=>s.classList.remove("active"));
+
+document.getElementById(id).classList.add("active");
+
+}
+
+/* فتح صفحة */
+
+function openPage(id,musicId){
+
+show(id);
+
+stopAll();
+
+document.getElementById(musicId).play();
+
+}
+
+/* رجوع */
 
 function goHome(){
-document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-document.getElementById("home").classList.add("active");
+
+show("home");
+
+stopAll();
+
+document.getElementById("mainMusic").play();
+
 }
 
-function counter(date,id){
-let target=new Date(date).getTime();
-setInterval(()=>{
-let now=new Date().getTime();
-let diff=now-target;
+/* ايقاف الصوت */
 
-let days=Math.floor(diff/(1000*60*60*24));
-let years=Math.floor(days/365);
+function stopAll(){
+
+document.querySelectorAll("audio").forEach(a=>{
+a.pause();
+a.currentTime=0;
+});
+
+}
+
+/* العداد الدقيق */
+
+function preciseDiff(startDate){
+
+let now=new Date();
+let start=new Date(startDate);
+
+let y=now.getFullYear()-start.getFullYear();
+let m=now.getMonth()-start.getMonth();
+let d=now.getDate()-start.getDate();
+let h=now.getHours()-start.getHours();
+let min=now.getMinutes()-start.getMinutes();
+let s=now.getSeconds()-start.getSeconds();
+
+if(s<0){s+=60;min--;}
+if(min<0){min+=60;h--;}
+if(h<0){h+=24;d--;}
+if(d<0){
+m--;
+let prev=new Date(now.getFullYear(),now.getMonth(),0);
+d+=prev.getDate();
+}
+if(m<0){m+=12;y--;}
+
+return {y,m,d,h,min,s};
+
+}
+
+function startCounter(date,id){
+
+function update(){
+
+let t=preciseDiff(date);
+
+document.getElementById(id).innerHTML=`
+
+<div class="glass-counter">
+
+<div class="time-box"><span>سنين</span><span>${t.y}</span></div>
+<div class="time-box"><span>شهور</span><span>${t.m}</span></div>
+<div class="time-box"><span>أيام</span><span>${t.d}</span></div>
+<div class="time-box"><span>ساعات</span><span>${t.h}</span></div>
+<div class="time-box"><span>دقايق</span><span>${t.min}</span></div>
+<div class="time-box"><span>ثواني</span><span>${t.s}</span></div>
+
+</div>
+
+`;
+
+}
+
+update();
+setInterval(update,1000);
+
+}
+
+/* التواريخ */
+
+startCounter("2002-02-12T00:00:00","count1");
+startCounter("2005-12-12T00:00:00","count2");
+startCounter("2000-09-16T00:00:00","count3");
+
+/* المفاجأة */
+
+function surprise(id){
 
 document.getElementById(id).innerHTML=
-"عدى " + years + " سنة و " + (days%365) + " يوم 💖";
-},1000);
+
+"ربنا يخليكي ي اغلي اخت ف الدنيا 🥺♥";
+
 }
 
-counter("2002-02-12","count1");
-counter("2005-12-12","count2");
-counter("2000-09-16","count3");
+/* القلوب */
+
+function createHearts(){
+
+setInterval(()=>{
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"%";
+
+heart.style.fontSize=(20+Math.random()*30)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),5000);
+
+},300);
+
+}
 
 </script>
 
