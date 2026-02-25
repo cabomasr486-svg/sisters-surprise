@@ -3,259 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>❤️ Sisters</title>
+<title>ليكو ياحبايب قلبي ❤️</title>
 
 <style>
-
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(180deg,#2b0057,#6a00a8);
+background:linear-gradient(135deg,#111,#1c1c1c);
 color:white;
 text-align:center;
 }
 
-/* اخفاء الصفحات */
-.page{
+.screen{
 display:none;
 padding:20px;
+min-height:100vh;
 }
 
-.home{
-display:none;
-padding:40px 20px;
-}
-
-.title{
-font-size:32px;
-margin-bottom:30px;
-text-shadow:0 0 20px #ff4ecd;
-}
-
-/* login */
-.login{
-padding:40px;
+.active{
+display:block;
 }
 
 input{
 padding:12px;
-border-radius:20px;
 border:none;
-outline:none;
-text-align:center;
+border-radius:10px;
+margin:10px;
+font-size:16px;
 }
 
 button{
 padding:12px 25px;
 border:none;
-border-radius:20px;
-background:linear-gradient(90deg,#ff0099,#7b00ff);
-color:white;
-margin-top:15px;
-cursor:pointer;
-}
-
-/* كروت الاسماء */
-.cardBtn{
-background:rgba(255,255,255,0.1);
-margin:15px;
-padding:20px;
-border-radius:20px;
-font-size:22px;
-cursor:pointer;
-backdrop-filter:blur(10px);
-box-shadow:0 0 20px rgba(255,0,200,0.5);
-}
-
-/* الصورة */
-.avatar{
-width:160px;
-height:160px;
-border-radius:50%;
-margin:20px auto;
-background-size:cover;
-background-position:center;
-border:4px solid #ff4ecd;
-box-shadow:0 0 40px #ff4ecd;
-}
-
-/* الاسم */
-.name{
-font-size:34px;
-text-shadow:0 0 20px #ff4ecd;
-}
-
-/* التاريخ */
-.date{
-display:inline-block;
-background:black;
-padding:10px 25px;
 border-radius:25px;
-margin:15px;
-box-shadow:0 0 20px #ff4ecd;
-}
-
-/* العداد */
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-padding:20px;
-}
-
-.box{
-background:rgba(255,255,255,0.08);
-padding:20px;
-border-radius:15px;
-backdrop-filter:blur(10px);
-}
-
-.number{
-font-size:26px;
-}
-
-.back{
-margin-top:20px;
-padding:15px;
-background:linear-gradient(90deg,#ff0099,#7b00ff);
-border-radius:15px;
+background:#ff2e63;
+color:white;
+font-size:16px;
 cursor:pointer;
+margin:10px;
+transition:.3s;
 }
 
+button:hover{
+transform:scale(1.05);
+background:#ff004f;
+}
+
+.cover{
+width:90%;
+max-width:350px;
+border-radius:20px;
+box-shadow:0 0 25px rgba(255,0,100,.5);
+margin-top:20px;
+}
+
+.photo{
+width:85%;
+max-width:300px;
+border-radius:20px;
+margin-top:20px;
+box-shadow:0 0 20px rgba(255,255,255,.3);
+}
+
+.glass{
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(10px);
+padding:15px;
+border-radius:15px;
+margin:20px auto;
+width:80%;
+max-width:300px;
+font-size:18px;
+}
 </style>
 </head>
+
 <body>
 
-<!-- LOGIN -->
-<div class="login" id="loginPage">
-<h2>ادخل الباسورد 🔒</h2>
+<!-- شاشة الباسورد -->
+<div id="login" class="screen active">
+<h2>ادخلي الباسورد 💌</h2>
 <input type="password" id="mainPass" placeholder="الباسورد الرئيسي">
 <br>
 <button onclick="checkMain()">دخول</button>
 </div>
 
-<!-- HOME -->
-<div class="home" id="home">
-<div class="title">اختر ❤️</div>
+<!-- الشاشة الرئيسية -->
+<div id="home" class="screen">
 
-<div class="cardBtn" onclick="checkPerson('eman')">ايمان ❤️</div>
-<div class="cardBtn" onclick="checkPerson('zainab')">زينب ❤️</div>
-<div class="cardBtn" onclick="checkPerson('rokia')">رقيه ❤️</div>
-</div>
+<img src="cover.gif" class="cover">
 
-<!-- ايمان -->
-<div class="page" id="eman">
-<div class="avatar" style="background-image:url('eman.jpg')"></div>
-<div class="name">ايمان ❤️</div>
-<div class="date">📅 2002-02-12</div>
-<div class="grid">
-<div class="box"><div id="eman_y" class="number"></div><div>سنة</div></div>
-<div class="box"><div id="eman_m" class="number"></div><div>شهر</div></div>
-<div class="box"><div id="eman_d" class="number"></div><div>يوم</div></div>
-<div class="box"><div id="eman_h" class="number"></div><div>ساعة</div></div>
-<div class="box"><div id="eman_min" class="number"></div><div>دقيقة</div></div>
-<div class="box"><div id="eman_s" class="number"></div><div>ثانية</div></div>
-</div>
-<div class="back" onclick="goHome()">رجوع</div>
+<audio id="mainMusic" src="main.mp3" autoplay loop></audio>
+
+<h2>اختاري اسمك 🌚♥</h2>
+
+<button onclick="openPage('eman')">ايمان</button>
+<button onclick="openPage('rokaia')">رقيه</button>
+<button onclick="openPage('zainab')">زينب</button>
+
+<p style="margin-top:20px;font-size:17px;">
+انتم نعمة من ربنا في حياتي ❤️  
+وجودكم جنبي أكبر هدية في الدنيا  
+وربنا يخليكو ليا دايماً ياحبايب قلبي 💕
+</p>
+
+<h3>ليكو ياحبايب قلبي ❤️</h3>
+
 </div>
 
-<!-- زينب -->
-<div class="page" id="zainab">
-<div class="avatar" style="background-image:url('zainab.jpg')"></div>
-<div class="name">زينب ❤️</div>
-<div class="date">📅 2000-09-16</div>
-<div class="grid">
-<div class="box"><div id="zainab_y" class="number"></div><div>سنة</div></div>
-<div class="box"><div id="zainab_m" class="number"></div><div>شهر</div></div>
-<div class="box"><div id="zainab_d" class="number"></div><div>يوم</div></div>
-<div class="box"><div id="zainab_h" class="number"></div><div>ساعة</div></div>
-<div class="box"><div id="zainab_min" class="number"></div><div>دقيقة</div></div>
-<div class="box"><div id="zainab_s" class="number"></div><div>ثانية</div></div>
-</div>
-<div class="back" onclick="goHome()">رجوع</div>
+<!-- صفحة ايمان -->
+<div id="eman" class="screen">
+<h2>ايمان ❤️</h2>
+<img src="eman.jpg" class="photo">
+<audio src="eman.mp3" controls></audio>
+<div class="glass" id="count1"></div>
+<button onclick="goHome()">رجوع</button>
 </div>
 
-<!-- رقيه -->
-<div class="page" id="rokia">
-<div class="avatar" style="background-image:url('rokia.jpg')"></div>
-<div class="name">رقيه ❤️</div>
-<div class="date">📅 2005-12-12</div>
-<div class="grid">
-<div class="box"><div id="rokia_y" class="number"></div><div>سنة</div></div>
-<div class="box"><div id="rokia_m" class="number"></div><div>شهر</div></div>
-<div class="box"><div id="rokia_d" class="number"></div><div>يوم</div></div>
-<div class="box"><div id="rokia_h" class="number"></div><div>ساعة</div></div>
-<div class="box"><div id="rokia_min" class="number"></div><div>دقيقة</div></div>
-<div class="box"><div id="rokia_s" class="number"></div><div>ثانية</div></div>
+<!-- صفحة رقيه -->
+<div id="rokaia" class="screen">
+<h2>رقيه ❤️</h2>
+<img src="rokaia.jpg" class="photo">
+<audio src="rokaia.mp3" controls></audio>
+<div class="glass" id="count2"></div>
+<button onclick="goHome()">رجوع</button>
 </div>
-<div class="back" onclick="goHome()">رجوع</div>
+
+<!-- صفحة زينب -->
+<div id="zainab" class="screen">
+<h2>زينب ❤️</h2>
+<img src="zainab.jpg" class="photo">
+<audio src="zainab.mp3" controls></audio>
+<div class="glass" id="count3"></div>
+<button onclick="goHome()">رجوع</button>
 </div>
 
 <script>
 
-const mainPassword="love";
-
-const personPasswords={
-eman:"eman2002",
-zainab:"zainab2000",
-rokia:"rokia2005"
-};
-
 function checkMain(){
 let pass=document.getElementById("mainPass").value;
-if(pass===mainPassword){
-document.getElementById("loginPage").style.display="none";
-document.getElementById("home").style.display="block";
+if(pass==="love"){
+document.getElementById("login").classList.remove("active");
+document.getElementById("home").classList.add("active");
 }else{
-alert("الباسورد غلط");
-}
-}
-
-function checkPerson(id){
-let p=prompt("ادخل باسورد "+id);
-if(p===personPasswords[id]){
-openPage(id);
-}else{
-alert("الباسورد غلط");
+alert("الباسورد غلط 😅");
 }
 }
 
 function openPage(id){
-document.getElementById("home").style.display="none";
-document.querySelectorAll(".page").forEach(p=>p.style.display="none");
-document.getElementById(id).style.display="block";
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
 
 function goHome(){
-document.querySelectorAll(".page").forEach(p=>p.style.display="none");
-document.getElementById("home").style.display="block";
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById("home").classList.add("active");
 }
 
-function calc(id,date){
-let now=new Date();
-let start=new Date(date);
-let diff=now-start;
-
-let s=Math.floor(diff/1000);
-let m=Math.floor(s/60);
-let h=Math.floor(m/60);
-let d=Math.floor(h/24);
-let mo=Math.floor(d/30);
-let y=Math.floor(mo/12);
-
-document.getElementById(id+"_y").innerText=y;
-document.getElementById(id+"_m").innerText=mo%12;
-document.getElementById(id+"_d").innerText=d%30;
-document.getElementById(id+"_h").innerText=h%24;
-document.getElementById(id+"_min").innerText=m%60;
-document.getElementById(id+"_s").innerText=s%60;
-}
-
+function counter(date,id){
+let target=new Date(date).getTime();
 setInterval(()=>{
-calc("eman","2002-02-12");
-calc("zainab","2000-09-16");
-calc("rokia","2005-12-12");
+let now=new Date().getTime();
+let diff=now-target;
+
+let days=Math.floor(diff/(1000*60*60*24));
+let years=Math.floor(days/365);
+
+document.getElementById(id).innerHTML=
+"عدى " + years + " سنة و " + (days%365) + " يوم 💖";
 },1000);
+}
+
+counter("2002-02-12","count1");
+counter("2005-12-12","count2");
+counter("2000-09-16","count3");
 
 </script>
 
