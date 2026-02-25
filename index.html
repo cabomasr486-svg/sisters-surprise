@@ -3,140 +3,269 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تسجيل الدخول</title>
+<title>💜 Secret Page</title>
 
 <style>
+
 body{
-  margin:0;
-  font-family:Arial;
-  background: linear-gradient(135deg,#3a0ca3,#7209b7,#b5179e);
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#1a002f,#3a0066,#ff0080);
+color:white;
+text-align:center;
+overflow:hidden;
 }
 
 /* القلوب */
 .heart{
-  position:absolute;
-  color:#ff4da6;
-  font-size:20px;
-  animation: float 6s linear infinite;
+position:fixed;
+color:red;
+animation:float 6s linear infinite;
 }
 
 @keyframes float{
-  0%{transform:translateY(100vh);opacity:0;}
-  50%{opacity:1;}
-  100%{transform:translateY(-10vh);opacity:0;}
+0%{transform:translateY(100vh);opacity:1;}
+100%{transform:translateY(-10vh);opacity:0;}
 }
 
 /* الكارت */
-.login-box{
-  background: rgba(255,255,255,0.08);
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-  backdrop-filter: blur(10px);
-  width:300px;
-  color:white;
-  box-shadow:0 0 30px rgba(0,0,0,0.4);
+.card{
+background:rgba(255,255,255,0.1);
+padding:25px;
+border-radius:20px;
+width:90%;
+max-width:350px;
+margin:100px auto;
+backdrop-filter:blur(10px);
+box-shadow:0 0 20px rgba(255,0,200,0.5);
 }
 
-/* الدائرة */
-.circle{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  border:6px solid rgba(255,255,255,0.2);
-  border-top:6px solid #ff4da6;
-  margin:auto;
-  animation: spin 3s linear infinite;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:30px;
-}
-
-@keyframes spin{
-  100%{transform:rotate(360deg);}
-}
-
+/* input */
 input{
-  width:100%;
-  padding:12px;
-  margin-top:20px;
-  border:none;
-  border-radius:10px;
-  outline:none;
-  font-size:16px;
+padding:12px;
+border:none;
+border-radius:10px;
+width:80%;
+margin-top:10px;
 }
 
+/* button */
 button{
-  width:100%;
-  padding:12px;
-  margin-top:15px;
-  border:none;
-  border-radius:12px;
-  font-size:18px;
-  color:white;
-  background: linear-gradient(45deg,#ff4da6,#7b2ff7);
-  cursor:pointer;
+padding:12px 25px;
+border:none;
+border-radius:10px;
+margin-top:15px;
+background:linear-gradient(45deg,#ff0080,#8000ff);
+color:white;
+font-size:16px;
+cursor:pointer;
 }
 
-button:hover{
-  opacity:0.8;
+/* صورة */
+img{
+width:150px;
+border-radius:15px;
+margin-top:10px;
 }
+
+/* الاسم */
+.name{
+font-size:28px;
+margin-bottom:10px;
+text-shadow:0 0 10px pink;
+}
+
+/* الرسالة */
+.msg{
+margin-top:15px;
+font-size:18px;
+min-height:50px;
+}
+
+/* العداد */
+.age{
+margin-top:15px;
+font-size:20px;
+color:#00ffff;
+}
+
 </style>
 
 </head>
 <body>
 
-<!-- القلوب -->
-<script>
-for(let i=0;i<20;i++){
-  let heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="❤";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=(3+Math.random()*5)+"s";
-  heart.style.fontSize=(15+Math.random()*25)+"px";
-  document.body.appendChild(heart);
-}
-</script>
+<audio id="mainMusic" loop>
+<source src="main.mp3">
+</audio>
 
-<div class="login-box">
+<audio id="zainabMusic">
+<source src="zainab.mp3">
+</audio>
 
-  <div class="circle">❤</div>
+<audio id="emanMusic">
+<source src="eman.mp3">
+</audio>
 
-  <h2>😂 ثواني يا روحي</h2>
+<audio id="rokiaMusic">
+<source src="rokia.mp3">
+</audio>
 
-  <input type="password" id="pass" placeholder="ادخل الباسورد">
-
-  <button onclick="login()">دخول</button>
-
-</div>
+<div id="app"></div>
 
 <script>
 
-/* غير الباسورد من هنا */
-const PASSWORD = "1234";
+/* قلوب */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤";
+heart.style.left=Math.random()*100+"%";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},500);
 
+/* شاشة الدخول */
 function login(){
 
-  let p=document.getElementById("pass").value;
-
-  if(p === PASSWORD){
-
-    window.location.href="home.html";
-
-  }else{
-
-    alert("الباسورد غلط");
-
-  }
+document.getElementById("app").innerHTML=`
+<div class="card">
+<h2>💜 ادخل الباسورد</h2>
+<input type="password" id="pass">
+<br>
+<button onclick="checkMain()">دخول</button>
+</div>
+`;
 
 }
+
+function checkMain(){
+
+let pass=document.getElementById("pass").value;
+
+if(pass=="love"){
+document.getElementById("mainMusic").play();
+home();
+}else{
+alert("❌ باسورد غلط");
+}
+
+}
+
+/* الصفحة الرئيسية */
+function home(){
+
+document.getElementById("app").innerHTML=`
+<div class="card">
+<h2>اخواتي الغاليين 💜</h2>
+
+<button onclick="openPerson('zainab')">زينب</button><br>
+<button onclick="openPerson('eman')">ايمان</button><br>
+<button onclick="openPerson('rokia')">رقيه</button>
+
+</div>
+`;
+
+}
+
+/* فتح صفحة الشخص */
+function openPerson(name){
+
+let pass=prompt("ادخل باسورد "+name);
+
+if(pass!=name){
+alert("❌ باسورد غلط");
+return;
+}
+
+document.getElementById("mainMusic").pause();
+
+let data={
+zainab:{
+img:"zainab.jpg",
+music:"zainabMusic",
+msg:"اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر ويفرحك علطول واتمني اشوفك اكتر مابتخيل 🤲🫶🥺❤",
+date:"2005-09-01"
+},
+eman:{
+img:"eman.jpg",
+music:"emanMusic",
+msg:"اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر ويفرحك علطول واتمني اشوفك اكتر مابتخيل 🤲🫶🥺❤",
+date:"2003-02-01"
+},
+rokia:{
+img:"rokia.jpg",
+music:"rokiaMusic",
+msg:"اختي الغاليه يا اغلي الناس ربنا يخليكي ليا ويحفظك من كل شر ويفرحك علطول واتمني اشوفك اكتر مابتخيل 🤲🫶🥺❤",
+date:"2010-12-01"
+}
+};
+
+let p=data[name];
+
+document.getElementById(p.music).play();
+
+document.getElementById("app").innerHTML=`
+<div class="card">
+<div class="name">${name}</div>
+
+<img src="${p.img}">
+
+<div class="msg" id="msg"></div>
+
+<div class="age" id="age"></div>
+
+<button onclick="location.reload()">رجوع</button>
+
+</div>
+`;
+
+typeText(p.msg);
+
+setInterval(()=>updateAge(p.date),1000);
+
+}
+
+/* كتابة الرسالة */
+function typeText(text){
+
+let i=0;
+
+let el=document.getElementById("msg");
+
+let timer=setInterval(()=>{
+
+el.innerHTML+=text[i];
+
+i++;
+
+if(i>=text.length)clearInterval(timer);
+
+},50);
+
+}
+
+/* حساب العمر */
+function updateAge(birth){
+
+let b=new Date(birth);
+
+let now=new Date();
+
+let y=now.getFullYear()-b.getFullYear();
+let m=now.getMonth()-b.getMonth();
+let d=now.getDate()-b.getDate();
+
+if(d<0){m--;d+=30;}
+if(m<0){y--;m+=12;}
+
+document.getElementById("age").innerHTML=
+y+" سنة "+m+" شهر "+d+" يوم";
+
+}
+
+/* تشغيل */
+login();
 
 </script>
 
