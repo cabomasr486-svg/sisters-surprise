@@ -3,158 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secret Page 💜</title>
+<title>Secret Page ❤️</title>
 
 <style>
 
 body{
 margin:0;
-font-family:Tahoma;
-overflow:hidden;
-background:black;
-}
-
-/* Background Gradient */
-#loginScreen{
-position:fixed;
-width:100%;
-height:100%;
-background:linear-gradient(-45deg,#14002b,#240046,#3c096c,#5a189a);
-background-size:400% 400%;
-animation:bgMove 15s ease infinite;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-}
-
-@keyframes bgMove{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-/* Smoke */
-.smoke{
-position:absolute;
-width:200%;
-height:200%;
-background:url("https://i.ibb.co/4f1Z6Xk/smoke.png");
-background-size:cover;
-opacity:0.1;
-animation:smokeMove 60s linear infinite;
-}
-
-@keyframes smokeMove{
-from{transform:translateX(-50%) translateY(-50%) rotate(0deg);}
-to{transform:translateX(0%) translateY(0%) rotate(360deg);}
-}
-
-/* Stars */
-.stars{
-position:absolute;
-width:100%;
-height:100%;
-background:url("https://assets.codepen.io/13471/sparkles.gif");
-opacity:0.2;
-}
-
-/* Floating Hearts */
-.heart{
-position:absolute;
-color:#ff4da6;
-font-size:22px;
-animation:floatUp 8s linear infinite;
-opacity:0.6;
-}
-
-@keyframes floatUp{
-from{transform:translateY(100vh);}
-to{transform:translateY(-10vh);}
-}
-
-/* Glass Box */
-.login-box{
-position:relative;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(20px);
-padding:40px;
-border-radius:30px;
+font-family:Arial;
+background:linear-gradient(135deg,#0f001a,#1a0033,#000);
+color:white;
 text-align:center;
-box-shadow:0 0 40px rgba(255,0,200,0.4);
-animation:fadeIn 2s ease;
+overflow:hidden;
 }
 
-@keyframes fadeIn{
-from{opacity:0;transform:scale(0.8);}
-to{opacity:1;transform:scale(1);}
-}
-
-/* Loader Circle */
-.circle{
-width:130px;
-height:130px;
-border-radius:50%;
-border:6px solid rgba(255,255,255,0.2);
-border-top:6px solid #ff4da6;
-border-right:6px solid #7a5cff;
-animation:spin 2s linear infinite;
-display:flex;
+.page{
+display:none;
+height:100vh;
 justify-content:center;
 align-items:center;
+flex-direction:column;
+}
+
+.active{
+display:flex;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+box-shadow:0 0 30px rgba(255,0,150,0.3);
+width:85%;
+max-width:350px;
+}
+
+/* TikTok Loader */
+
+.loader-circle{
+
+width:120px;
+height:120px;
+border-radius:50%;
+border:6px solid rgba(255,255,255,0.1);
+border-top:6px solid #ff0080;
+border-right:6px solid #8000ff;
+
+animation:spin 1s linear infinite;
+
+display:flex;
+align-items:center;
+justify-content:center;
 margin:auto;
-margin-bottom:25px;
+}
+
+.loader-heart{
+
+font-size:35px;
+animation:pulse 1s infinite;
+
 }
 
 @keyframes spin{
-100%{transform:rotate(360deg);}
-}
 
-.circle span{
-font-size:35px;
-color:#ff4da6;
-animation:pulse 1.5s infinite;
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+
 }
 
 @keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.2);}
-100%{transform:scale(1);}
+
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.3);}
+
 }
 
-/* Text */
-#loadingText{
-color:white;
-font-size:22px;
-margin-bottom:15px;
-letter-spacing:1px;
+.dots{
+margin-top:15px;
+}
+
+.dot{
+display:inline-block;
+width:8px;
+height:8px;
+background:#ff0080;
+border-radius:50%;
+margin:5px;
+animation:bounce 1s infinite alternate;
+}
+
+.dot:nth-child(2){animation-delay:.2s;}
+.dot:nth-child(3){animation-delay:.4s;}
+
+@keyframes bounce{
+from{transform:translateY(0);}
+to{transform:translateY(-10px);}
 }
 
 /* Input */
+
 input{
+
+width:90%;
 padding:12px;
-border-radius:12px;
 border:none;
-margin-top:10px;
-width:220px;
+border-radius:10px;
+margin-top:15px;
+font-size:16px;
 text-align:center;
-outline:none;
+
 }
 
 button{
+
 margin-top:15px;
-padding:12px 25px;
+padding:12px 30px;
 border:none;
 border-radius:12px;
-background:linear-gradient(45deg,#ff4da6,#7a5cff);
+font-size:18px;
+background:linear-gradient(45deg,#ff0080,#8000ff);
 color:white;
-font-size:16px;
 cursor:pointer;
-transition:0.3s;
+
 }
 
-button:hover{
-transform:scale(1.1);
+/* Image */
+
+img{
+
+width:160px;
+height:160px;
+border-radius:50%;
+margin:15px;
+border:4px solid #ff0080;
+object-fit:cover;
+
+}
+
+/* Hearts */
+
+.heart{
+position:absolute;
+color:red;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+
+0%{transform:translateY(-100px);}
+100%{transform:translateY(100vh);}
+
 }
 
 </style>
@@ -162,55 +160,185 @@ transform:scale(1.1);
 
 <body>
 
-<div id="loginScreen">
+<div id="hearts"></div>
 
-<div class="smoke"></div>
-<div class="stars"></div>
+<!-- Login -->
+<div id="loginPage" class="page active">
 
-<div class="login-box">
+<div class="card">
 
-<div class="circle">
-<span>❤</span>
-</div>
+<h2>توأني يا روحي 😂❤️</h2>
 
-<h2 id="loadingText">جاري التحميل</h2>
+<input type="password" id="pass" placeholder="ادخل الباسورد">
 
-<input type="password" id="mainPass" placeholder="ادخل الباسورد">
-<br>
-<button onclick="checkMain()">دخول</button>
+<button onclick="login()">دخول</button>
 
 </div>
+
 </div>
+
+<!-- Loading TikTok Style -->
+<div id="loadingPage" class="page">
+
+<div>
+
+<div class="loader-circle">
+<div class="loader-heart">❤️</div>
+</div>
+
+<div style="margin-top:20px;font-size:20px">
+جاري التحميل السينمائي
+</div>
+
+<div class="dots">
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+</div>
+
+</div>
+
+</div>
+
+<!-- Content -->
+<div id="contentPage" class="page">
+
+<div class="card">
+
+<h2 id="name"></h2>
+
+<img id="photo">
+
+<p id="message"></p>
+
+<button onclick="back()">رجوع</button>
+
+</div>
+
+</div>
+
+<audio id="audio"></audio>
 
 <script>
 
-/* Floating hearts generate */
-setInterval(()=>{
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerText="❤";
-heart.style.left=Math.random()*100+"%";
-heart.style.fontSize=(15+Math.random()*25)+"px";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),8000);
-},600);
+/* البيانات */
 
-/* Changing text */
-let texts=["جاري التحميل","ثواني يا روحي 😂","قربنا نوصل ✨"];
-let i=0;
+const data={
 
-setInterval(()=>{
-i++;
-if(i>=texts.length)i=0;
-document.getElementById("loadingText").innerText=texts[i];
+"زوزه":{
+name:"زينب ❤️",
+img:"zainab.jpg",
+audio:"zainab.mp3",
+msg:"اختي الغاليه ربنا يخليكي ليا ❤️"
+},
+
+"ايمي":{
+name:"إيمان ❤️",
+img:"eman.jpg",
+audio:"eman.mp3",
+msg:"ربنا يحفظك ويخليكي ليا ❤️"
+},
+
+"رورو":{
+name:"رقيه ❤️",
+img:"rokaia.jpg",
+audio:"rokaia.mp3",
+msg:"ربنا يخليكي ليا دايما ❤️"
+}
+
+};
+
+/* login */
+
+function login(){
+
+const pass=document.getElementById("pass").value;
+
+if(data[pass]){
+
+showLoading(pass);
+
+}else{
+
+alert("الباسورد غلط");
+
+}
+
+}
+
+/* loading */
+
+function showLoading(pass){
+
+document.getElementById("loginPage").classList.remove("active");
+
+document.getElementById("loadingPage").classList.add("active");
+
+setTimeout(()=>{
+
+showContent(pass);
+
 },2500);
 
-/* Password */
-function checkMain(){
-if(document.getElementById("mainPass").value=="love"){
-alert("تم الدخول بنجاح 💜");
 }
+
+/* show content */
+
+function showContent(pass){
+
+const person=data[pass];
+
+document.getElementById("loadingPage").classList.remove("active");
+
+document.getElementById("contentPage").classList.add("active");
+
+document.getElementById("name").innerText=person.name;
+
+document.getElementById("photo").src=person.img;
+
+document.getElementById("message").innerText=person.msg;
+
+const audio=document.getElementById("audio");
+
+audio.src=person.audio;
+
+audio.play();
+
 }
+
+/* back */
+
+function back(){
+
+document.getElementById("contentPage").classList.remove("active");
+
+document.getElementById("loginPage").classList.add("active");
+
+document.getElementById("audio").pause();
+
+}
+
+/* hearts */
+
+function heart(){
+
+const h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="❤️";
+
+h.style.left=Math.random()*100+"%";
+
+h.style.animationDuration=(Math.random()*3+3)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),6000);
+
+}
+
+setInterval(heart,400);
 
 </script>
 
